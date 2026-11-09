@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#101d2a"><title>X SURVIVAL</title>
+<style>
+:root{color-scheme:dark;--gold:#f5b94c;--ice:#b9e7f4;--panel:#152638;--line:#38546b}
+*{box-sizing:border-box}body{margin:0;background:#0c1722;color:#f5f7fa;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden}
+header{padding:14px 16px;background:linear-gradient(120deg,#132638,#203d51);display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}
+.brand{font-weight:900;letter-spacing:2px;font-size:21px}.brand span{color:var(--gold)}.day{font-size:12px;color:#c5d7e4}
+.resources{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:10px;background:#101e2c}
+.resource{background:#1b3043;border:1px solid #314b60;border-radius:12px;padding:9px;text-align:center;font-weight:700}.resource small{display:block;color:#b4c7d5;font-weight:500;font-size:11px}.resource b{font-size:18px}
+main{max-width:760px;margin:auto;padding:12px}.status{display:flex;justify-content:space-between;gap:8px;margin:3px 0 10px;color:#c6d8e4;font-size:12px}
+.scene{position:relative;background:linear-gradient(#a9d9e8,#d9eff1 60%,#b5d4dc);border:2px solid #537589;border-radius:16px;overflow:hidden;box-shadow:0 12px 30px #0006}
+canvas{display:block;width:100%;height:auto;touch-action:manipulation}
+.hud{position:absolute;top:10px;right:10px;left:10px;display:flex;justify-content:space-between;pointer-events:none}.pill{background:#102638d9;border:1px solid #ffffff44;border-radius:20px;padding:6px 10px;font-size:11px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:12px;margin-top:12px}
+h2{font-size:15px;margin:0 0 10px;color:#eaf6fc}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+button{border:1px solid #557087;border-radius:11px;padding:11px 8px;background:#233d52;color:#fff;font:inherit;font-size:13px;font-weight:700;cursor:pointer;min-height:44px}
+button:active{transform:scale(.98)}button.primary{background:#a96820;border-color:#e6a33d}button:disabled{opacity:.42}
+.meter{height:9px;background:#0c1722;border-radius:9px;overflow:hidden;margin:8px 0}.meter i{display:block;height:100%;background:linear-gradient(90deg,#e29a31,#ffcf67);width:40%;transition:width .25s}
+.log{font-size:12px;color:#c4d5e0;line-height:1.8;min-height:42px}.hint{font-size:11px;color:#9fb7c8;margin-top:8px}
+footer{text-align:center;color:#8198a9;font-size:11px;padding:18px}
+@media(min-width:620px){.grid{grid-template-columns:repeat(4,1fr)}}
+</style></head>
+<body>
+<header><div><div class="brand">X <span>SURVIVAL</span></div><div class="day">FROZEN FRONTIER · PROTOTYPE 0.1</div></div><div class="pill">☃️ اليوم <b id="day">1</b></div></header>
+<section class="resources">
+ <div class="resource">🪵 <b id="wood">80</b><small>خشب</small></div>
+ <div class="resource">🪨 <b id="coal">50</b><small>فحم</small></div>
+ <div class="resource">🥫 <b id="food">100</b><small>طعام</small></div>
+</section>
+<main>
+<div class="status"><span>👥 الناجون: <b id="people">5</b></span><span>🌡️ حرارة المستوطنة: <b id="temp">62%</b></span><span>❄️ الطقس: عاصفة خفيفة</span></div>
+<div class="scene"><canvas id="world" width="720" height="460" aria-label="المستوطنة الثلجية"></canvas><div class="hud"><span class="pill">🏔️ وادي الصقيع</span><span class="pill" id="level">🔥 المدفأة مستوى 1</span></div></div>
+<div class="panel"><h2>🔥 المدفأة المركزية</h2><div class="meter"><i id="heatbar"></i></div><div class="grid"><button class="primary" onclick="feedFire()">إضافة 10 فحم</button><button onclick="upgradeFire()">ترقية المدفأة · 40 خشب + 25 فحم</button></div></div>
+<div class="panel"><h2>🛠️ إدارة المستوطنة</h2><div class="grid"><button onclick="gather('wood')">🪵 جمع الخشب</button><button onclick="gather('coal')">🪨 استخراج الفحم</button><button onclick="gather('food')">🥫 جمع الطعام</button><button onclick="buildHouse()">🏠 بناء منزل · 35 خشب</button><button onclick="buildStore()">📦 بناء مخزن · 45 خشب</button><button onclick="nextDay()">🌙 إنهاء اليوم</button></div><div class="hint">اضغط على مباني المستوطنة أو استخدم الأزرار لجمع الموارد وتطوير قاعدتك.</div></div>
+<div class="panel"><h2>📜 سجل المستوطنة</h2><div class="log" id="log">وصل خمسة ناجين إلى الوادي. حافظ على اشتعال المدفأة قبل حلول الليل.</div></div>
+</main><footer>X SURVIVAL · تجربة أولية قابلة للتطوير</footer>
+<script>
+const $=id=>document.getElementById(id);
+let s={wood:80,coal:50,food:100,people:5,heat:62,fire:1,houses:1,stores:0,day:1};
+function update(){for(let k of ['wood','coal','food','people','day'])$(k).textContent=s[k];$('temp').textContent=Math.round(s.heat)+'%';$('heatbar').style.width=s.heat+'%';$('level').textContent='🔥 المدفأة مستوى '+s.fire;localStorage.setItem('xs-survival-save',JSON.stringify(s));draw()}
+function say(t){$('log').textContent=t;update()}
+function gather(k){let amount=k==='food'?18:k==='wood'?20:14;s[k]+=amount;say('تم جمع '+amount+' من '+({wood:'الخشب',coal:'الفحم',food:'الطعام'}[k])+'.')}
+function feedFire(){if(s.coal<10)return say('الفحم غير كافٍ. اجمع المزيد أولاً.');s.coal-=10;s.heat=Math.min(100,s.heat+18);say('أضفت الفحم إلى المدفأة. ارتفعت الحرارة.')}
+function upgradeFire(){if(s.wood<40||s.coal<25)return say('تحتاج إلى 40 خشب و25 فحم لترقية المدفأة.');s.wood-=40;s.coal-=25;s.fire++;s.heat=Math.min(100,s.heat+10);say('رائع! تمت ترقية المدفأة إلى المستوى '+s.fire+'.')}
+function buildHouse(){if(s.wood<35)return say('الخشب غير كافٍ لبناء منزل.');s.wood-=35;s.houses++;s.people++;say('تم بناء منزل جديد. انضم ناجٍ جديد إلى المستوطنة!')}
+function buildStore(){if(s.wood<45)return say('تحتاج إلى 45 خشب لبناء المخزن.');s.wood-=45;s.stores++;say('تم بناء مخزن جديد. أصبح لديك '+s.stores+' مخزن.')}
+function nextDay(){s.day++;s.food=Math.max(0,s.food-s.people*3);s.heat=Math.max(0,s.heat-(18-s.fire*2));if(s.food===0)s.people=Math.max(1,s.people-1);if(s.heat<20)s.people=Math.max(1,s.people-1);say('انتهى اليوم '+(s.day-1)+'. استهلك الناجون الطعام وانخفضت الحرارة أثناء الليل.');}
+const c=$('world'),ctx=c.getContext('2d');
+function iso(x,y){return [360+(x-y)*52,230+(x+y)*27]}
+function diamond(x,y,w,h,color){ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(x,y-h);ctx.lineTo(x+w,y);ctx.lineTo(x,y+h);ctx.lineTo(x-w,y);ctx.closePath();ctx.fill();ctx.strokeStyle='#ffffff35';ctx.stroke()}
+function hut(x,y,scale=1){let [a,b]=iso(x,y);ctx.save();ctx.translate(a,b);ctx.scale(scale,scale);ctx.fillStyle='#6d8794';ctx.fillRect(-25,-2,50,28);ctx.fillStyle='#8c4e35';ctx.beginPath();ctx.moveTo(-31,0);ctx.lineTo(0,-28);ctx.lineTo(31,0);ctx.closePath();ctx.fill();ctx.fillStyle='#d8edf1';ctx.beginPath();ctx.moveTo(-31,0);ctx.lineTo(0,-28);ctx.lineTo(10,-18);ctx.lineTo(-18,8);ctx.closePath();ctx.fill();ctx.fillStyle='#283b4a';ctx.fillRect(-7,9,14,17);ctx.restore()}
+function tree(x,y){let [a,b]=iso(x,y);ctx.fillStyle='#725c48';ctx.fillRect(a-4,b-3,8,20);ctx.fillStyle='#315f59';ctx.beginPath();ctx.arc(a,b-12,17,0,7);ctx.fill();ctx.fillStyle='#dff4f4';ctx.beginPath();ctx.arc(a-5,b-20,8,0,7);ctx.fill()}
+function draw(){ctx.clearRect(0,0,720,460);ctx.fillStyle='#cbe7ec';ctx.fillRect(0,0,720,460);diamond(360,240,300,155,'#e9f4ed');for(let i=0;i<18;i++){let x=(i*73)%700+10,y=(i*47)%400+25;ctx.fillStyle='#ffffff99';ctx.beginPath();ctx.arc(x,y,2+(i%3),0,7);ctx.fill()}tree(1,1);tree(4,0);tree(5,3);hut(2,2,1.2);for(let i=0;i<s.houses;i++)hut(-2+i*1.3,-1,.7);if(s.stores)hut(-3,2,.85);let [fx,fy]=iso(0,0);ctx.fillStyle='#475b69';ctx.beginPath();ctx.ellipse(fx,fy,34,18,0,0,7);ctx.fill();ctx.fillStyle='#f18b32';ctx.beginPath();ctx.moveTo(fx,fy-37);ctx.quadraticCurveTo(fx-25,fy-5,fx,fy+3);ctx.quadraticCurveTo(fx+23,fy-8,fx,fy-37);ctx.fill();ctx.fillStyle='#ffe69a';ctx.beginPath();ctx.moveTo(fx,fy-25);ctx.quadraticCurveTo(fx-12,fy-3,fx,fy);ctx.quadraticCurveTo(fx+12,fy-8,fx,fy-25);ctx.fill();ctx.fillStyle='#2c4555';ctx.font='bold 15px system-ui';ctx.textAlign='center';ctx.fillText('الموقد',fx,fy+36);for(let i=0;i<s.people;i++){let x=fx-70+i*27,y=fy+64+(i%2)*8;ctx.fillStyle='#304d61';ctx.beginPath();ctx.arc(x,y-9,6,0,7);ctx.fill();ctx.fillRect(x-5,y-4,10,15);ctx.fillStyle='#f1c28d';ctx.fillRect(x-3,y-16,6,5)}}
+try{let saved=JSON.parse(localStorage.getItem('xs-survival-save'));if(saved)s={...s,...saved}}catch(e){}update();
+</script></body></html>
