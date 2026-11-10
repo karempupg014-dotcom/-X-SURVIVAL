@@ -4,80 +4,70 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#101d2a"><title>X SURVIVAL — Frozen Frontier</title>
 <style>
-:root{color-scheme:dark;--gold:#f6bd55;--ice:#bceaf5;--panel:#14283a;--line:#36566e;--muted:#a9c1d0}
-*{box-sizing:border-box}body{margin:0;background:#091522;color:#f5f8fb;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden}
-header{padding:13px 16px;background:linear-gradient(115deg,#102337,#254b61);display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #49677b;position:sticky;top:0;z-index:5}
+:root{color-scheme:dark;--gold:#f6bd55;--panel:#14283a;--line:#36566e}
+*{box-sizing:border-box}body{margin:0;background:#091522;color:#f5f8fb;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{padding:13px 16px;background:linear-gradient(115deg,#102337,#254b61);display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #49677b}
 .brand{font-weight:1000;letter-spacing:2px;font-size:23px}.brand span{color:var(--gold)}.sub{font-size:10px;color:#c2d7e2;letter-spacing:1px}.day{border:1px solid #7892a4;border-radius:20px;padding:7px 12px;font-size:12px}
-.resources{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;padding:10px;background:#0e1d2b;max-width:900px;margin:auto}
-.resource{background:linear-gradient(145deg,#20394e,#162b3d);border:1px solid #38576c;border-radius:12px;padding:9px 4px;text-align:center;font-weight:800;box-shadow:inset 0 1px #ffffff0c}.resource b{font-size:19px}.resource small{display:block;color:#b4c9d6;font-size:10px}
+.resources{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;padding:10px;background:#0e1d2b;max-width:900px;margin:auto}.resource{background:linear-gradient(145deg,#20394e,#162b3d);border:1px solid #38576c;border-radius:12px;padding:9px 4px;text-align:center;font-weight:800}.resource b{font-size:19px}.resource small{display:block;color:#b4c9d6;font-size:10px}
 main{max-width:900px;margin:auto;padding:12px}.status{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:3px 0 10px;color:#c6d8e4;font-size:12px}
-.scene{position:relative;background:#b9dfe8;border:2px solid #54788d;border-radius:19px;overflow:hidden;box-shadow:0 12px 35px #0007}
-canvas{display:block;width:100%;height:auto;touch-action:pan-y}
-.hud{position:absolute;top:10px;right:10px;left:10px;display:flex;justify-content:space-between;pointer-events:none;gap:6px}.pill{background:#102638dc;border:1px solid #ffffff55;border-radius:22px;padding:7px 11px;font-size:11px;box-shadow:0 3px 10px #0002}
-.scene-help{position:absolute;bottom:9px;left:10px;background:#102638bd;border-radius:12px;padding:5px 9px;font-size:10px;color:#e3f2f8}
-.panel{background:linear-gradient(145deg,#172e42,#102235);border:1px solid var(--line);border-radius:17px;padding:13px;margin-top:12px;box-shadow:0 7px 20px #0002}
-h2{font-size:16px;margin:0 0 11px;color:#f0f8fc}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-button{border:1px solid #58758a;border-radius:12px;padding:12px 8px;background:linear-gradient(145deg,#29475e,#1c354a);color:#fff;font:inherit;font-size:13px;font-weight:750;cursor:pointer;min-height:48px}
-button:active{transform:scale(.98)}button.primary{background:linear-gradient(145deg,#bd7a2a,#8f511c);border-color:#efb34e}button:disabled{opacity:.4;filter:grayscale(.6)}
+.scene{position:relative;height:clamp(350px,68vw,570px);background:#a9d9e6;border:2px solid #54788d;border-radius:19px;overflow:hidden;box-shadow:0 12px 35px #0007}#world{width:100%;height:100%;display:block;touch-action:none}
+.hud{position:absolute;top:10px;right:10px;left:10px;display:flex;justify-content:space-between;pointer-events:none;gap:6px}.pill{background:#102638dc;border:1px solid #ffffff55;border-radius:22px;padding:7px 11px;font-size:11px}
+.scene-help{position:absolute;bottom:9px;left:10px;background:#102638bd;border-radius:12px;padding:5px 9px;font-size:10px;color:#e3f2f8;pointer-events:none}
+.camera{position:absolute;bottom:9px;right:10px;display:flex;gap:5px}.camera button{min-height:32px;padding:5px 10px;font-size:11px;background:#102638d9}
+.panel{background:linear-gradient(145deg,#172e42,#102235);border:1px solid var(--line);border-radius:17px;padding:13px;margin-top:12px;box-shadow:0 7px 20px #0002}h2{font-size:16px;margin:0 0 11px;color:#f0f8fc}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+button{border:1px solid #58758a;border-radius:12px;padding:12px 8px;background:linear-gradient(145deg,#29475e,#1c354a);color:#fff;font:inherit;font-size:13px;font-weight:750;cursor:pointer;min-height:48px}button:active{transform:scale(.98)}button.primary{background:linear-gradient(145deg,#bd7a2a,#8f511c);border-color:#efb34e}
 .meter{height:10px;background:#081522;border-radius:10px;overflow:hidden;margin:8px 0 12px;border:1px solid #365168}.meter i{display:block;height:100%;background:linear-gradient(90deg,#e59a32,#ffe08a);width:65%;transition:width .25s}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.stat{background:#0e2030;border-radius:10px;padding:8px;text-align:center;font-size:11px;color:#b8cbd7}.stat b{display:block;color:#fff;font-size:15px}
-.log{font-size:12px;color:#c4d5e0;line-height:1.8;min-height:38px}.hint{font-size:11px;color:#9fb7c8;margin-top:8px}
-.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}.tabs button{min-height:40px;padding:8px;font-size:12px}.tabs button.active{border-color:var(--gold);background:#57401f}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.stat{background:#0e2030;border-radius:10px;padding:8px;text-align:center;font-size:11px;color:#b8cbd7}.stat b{display:block;color:#fff;font-size:15px}.log{font-size:12px;color:#c4d5e0;line-height:1.8;min-height:38px}.hint{font-size:11px;color:#9fb7c8;margin-top:8px}
 footer{text-align:center;color:#8198a9;font-size:11px;padding:18px}
 @media(min-width:650px){.grid{grid-template-columns:repeat(3,1fr)}.resources{gap:12px;padding:14px}.resource{padding:12px}}
 </style></head>
 <body>
-<header><div><div class="brand">X <span>SURVIVAL</span></div><div class="sub">FROZEN FRONTIER · SURVIVAL PROTOTYPE 0.2</div></div><div class="day">☃️ اليوم <b id="day">1</b></div></header>
-<section class="resources">
- <div class="resource">🪵 <b id="wood">120</b><small>خشب</small></div><div class="resource">🪨 <b id="coal">90</b><small>فحم</small></div><div class="resource">🥫 <b id="food">160</b><small>طعام</small></div><div class="resource">⚙️ <b id="gear">12</b><small>معدات</small></div>
-</section>
+<header><div><div class="brand">X <span>SURVIVAL</span></div><div class="sub">FROZEN FRONTIER · 3D PROTOTYPE 0.3</div></div><div class="day">☃️ اليوم <b id="day">1</b></div></header>
+<section class="resources"><div class="resource">🪵 <b id="wood">120</b><small>خشب</small></div><div class="resource">🪨 <b id="coal">90</b><small>فحم</small></div><div class="resource">🥫 <b id="food">160</b><small>طعام</small></div><div class="resource">⚙️ <b id="gear">12</b><small>معدات</small></div></section>
 <main>
 <div class="status"><span>👥 الناجون: <b id="people">5</b></span><span>🌡️ الحرارة: <b id="temp">72%</b></span><span>❄️ الطقس: <b id="weather">ثلوج خفيفة</b></span></div>
-<div class="scene"><canvas id="world" width="900" height="570" aria-label="عالم X Survival الثلجي"></canvas><div class="hud"><span class="pill">🏔️ وادي الصقيع</span><span class="pill" id="level">🔥 المدفأة · مستوى 1</span></div><div class="scene-help">اضغط على مبنى لمعرفة تفاصيله</div></div>
+<div class="scene"><div id="world" aria-label="عالم ثلاثي الأبعاد"></div><div class="hud"><span class="pill">🏔️ وادي الصقيع · عالم 3D</span><span class="pill" id="level">🔥 المدفأة · مستوى 1</span></div><div class="scene-help">اسحب لتدوير الكاميرا · قرّب بإصبعين · اضغط على مبنى</div><div class="camera"><button onclick="zoom(-2)">＋</button><button onclick="resetCamera()">إعادة الكاميرا</button><button onclick="zoom(2)">－</button></div></div>
 <div class="panel"><h2>🔥 المدفأة المركزية</h2><div class="meter"><i id="heatbar"></i></div><div class="grid"><button class="primary" onclick="feedFire()">🔥 إضافة 10 فحم</button><button onclick="upgradeFire()">⬆️ ترقية المدفأة · 40 خشب + 25 فحم</button></div><div class="hint">المدفأة هي قلب المستوطنة؛ حافظ على حرارتها لحماية الناجين.</div></div>
-<div class="panel"><h2>🏗️ تطوير المستوطنة</h2><div class="grid"><button onclick="gather('wood')">🪵 إرسال فريق لجمع الخشب</button><button onclick="gather('coal')">⛏️ استخراج الفحم</button><button onclick="gather('food')">🥫 جمع المؤن</button><button onclick="build('house')">🏠 بناء منزل · 35 خشب</button><button onclick="build('farm')">🌱 إنشاء مزرعة · 50 خشب</button><button onclick="build('workshop')">⚙️ ورشة معدات · 45 خشب + 15 فحم</button></div><div class="hint">اختَر المباني ووسّع قاعدتك. كل منزل جديد يتيح استقبال ناجٍ إضافي.</div></div>
+<div class="panel"><h2>🏗️ تطوير المستوطنة</h2><div class="grid"><button onclick="gather('wood')">🪵 إرسال فريق لجمع الخشب</button><button onclick="gather('coal')">⛏️ استخراج الفحم</button><button onclick="gather('food')">🥫 جمع المؤن</button><button onclick="build('house')">🏠 بناء منزل · 35 خشب</button><button onclick="build('farm')">🌱 إنشاء مزرعة · 50 خشب</button><button onclick="build('workshop')">⚙️ ورشة معدات · 45 خشب + 15 فحم</button><button onclick="nextDay()">🌅 إنهاء اليوم التالي</button></div><div class="hint">كل منزل جديد يستقبل ناجيًا، والمزارع تنتج الطعام مع مرور الأيام.</div></div>
 <div class="panel"><h2>📊 حالة المستوطنة</h2><div class="stats"><div class="stat">🏠 المساكن<b id="houses">1</b></div><div class="stat">🌱 المزارع<b id="farms">0</b></div><div class="stat">⚙️ الورش<b id="workshops">0</b></div></div></div>
 <div class="panel"><h2>📜 أخبار الوادي</h2><div class="log" id="log">وصل خمسة ناجين إلى الوادي. أعد تشغيل المدفأة واجمع الموارد لتأسيس الملجأ.</div></div>
-<div class="tabs"><button class="active" onclick="showTip('base',this)">🏕️ القاعدة</button><button onclick="showTip('people',this)">👥 الناجون</button><button onclick="showTip('world',this)">🧭 الاستكشاف</button></div>
-</main><footer>X SURVIVAL · Prototype 0.2 · تطوير مستمر</footer>
-<script>
+</main><footer>X SURVIVAL · 3D Prototype 0.3 · تطوير مستمر</footer>
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
 const $=id=>document.getElementById(id);
 const defaults={wood:120,coal:90,food:160,gear:12,people:5,heat:72,fire:1,houses:1,farms:0,workshops:0,day:1,weather:0};
-let s={...defaults};let selected='';let tick=0;
-try{const old=JSON.parse(localStorage.getItem('xs-survival-save'));if(old)s={...s,...old,gear:old.gear??12,farms:old.farms??0,workshops:old.workshops??0}}catch(e){}
-function update(){['wood','coal','food','gear','people','day','houses','farms','workshops'].forEach(k=>$(k).textContent=s[k]);$('temp').textContent=Math.round(s.heat)+'%';$('heatbar').style.width=s.heat+'%';$('level').textContent='🔥 المدفأة · مستوى '+s.fire;$('weather').textContent=['ثلوج خفيفة','عاصفة ثلجية','سماء صافية'][s.weather%3];localStorage.setItem('xs-survival-save',JSON.stringify(s));draw()}
+let s={...defaults};try{const old=JSON.parse(localStorage.getItem('xs-survival-save'));if(old)s={...s,...old,gear:old.gear??12,farms:old.farms??0,workshops:old.workshops??0}}catch(e){}
+let scene,camera,renderer,controls,fireMesh,fireLight,flakes=[],survivorGroups=[],buildingMeshes=[],clock=new THREE.Clock();
+const root=new THREE.Group();const world=$('world');
+function mat(color,rough=.9,metal=0){return new THREE.MeshStandardMaterial({color,roughness:rough,metalness:metal})}
+const snow=mat('#e6f2ef'),ice=mat('#b7dce5'),wood=mat('#76513c'),roof=mat('#9c6042'),dark=mat('#344b5c'),glass=mat('#f2d58a'),green=mat('#28584f'),cloth=mat('#456b84'),skin=mat('#e4bd96'),gold=mat('#f5a33b'),stone=mat('#657987');
+function addBox(parent,w,h,d,material,x,y,z){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),material);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m}
+function addHouse(x,z,type='house'){const g=new THREE.Group();g.position.set(x,0,z);addBox(g,2.0,1.35,1.8,dark,0,.68,0);addBox(g,.48,.8,.08,wood,0,.4,.94);addBox(g,.35,.35,.09,glass,.62,.86,.94);const r=new THREE.Mesh(new THREE.ConeGeometry(1.55,.85,4),type==='farm'?mat('#688a67'):roof);r.rotation.y=Math.PI/4;r.position.y=1.75;r.castShadow=true;g.add(r);if(type==='farm'){for(let i=0;i<4;i++){let row=addBox(g,.12,.16,1.25,green,-.65+i*.42,.12,-1.45);row.rotation.z=.1}}if(type==='workshop'){addBox(g,.5,.45,.5,stone,.85,1.05,-.65);addBox(g,.3,.2,.3,gold,.85,1.4,-.65)}root.add(g);buildingMeshes.push(g);return g}
+function addTree(x,z){const g=new THREE.Group();g.position.set(x,0,z);addBox(g,.22,1,.22,wood,0,.5,0);for(let i=0;i<3;i++){const c=new THREE.Mesh(new THREE.ConeGeometry(1.0-i*.16,1.7,7),green);c.position.y=1.25+i*.62;c.castShadow=true;g.add(c)}root.add(g)}
+function addSurvivor(i){const g=new THREE.Group();const coat=mat(i%2?'#b87943':'#3d6078');const body=addBox(g,.42,.72,.28,coat,0,1.05,0);const head=new THREE.Mesh(new THREE.SphereGeometry(.2,12,10),skin);head.position.y=1.58;g.add(head);const hat=new THREE.Mesh(new THREE.SphereGeometry(.21,12,8),dark);hat.scale.y=.55;hat.position.y=1.76;g.add(hat);const leg1=addBox(g,.14,.55,.16,dark,-.12,.4,0),leg2=addBox(g,.14,.55,.16,dark,.12,.4,0);g.position.set(-2.2+i*.95,0,2.6+(i%2)*.45);root.add(g);survivorGroups.push({g,leg1,leg2,phase:i})}
+function init(){scene=new THREE.Scene();scene.background=new THREE.Color('#b7dce8');scene.fog=new THREE.Fog('#c7e4e9',17,36);camera=new THREE.PerspectiveCamera(42,1,.1,100);camera.position.set(10,12,14);renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;world.appendChild(renderer.domElement);controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.target.set(0,.4,0);controls.minDistance=7;controls.maxDistance=25;controls.maxPolarAngle=Math.PI*.47;controls.minPolarAngle=.25;
+scene.add(new THREE.HemisphereLight('#e9fbff','#6c8790',2.0));const sun=new THREE.DirectionalLight('#fff2d9',2.6);sun.position.set(-7,14,8);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);sun.shadow.camera.left=-15;sun.shadow.camera.right=15;sun.shadow.camera.top=15;sun.shadow.camera.bottom=-15;scene.add(sun);
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(42,42),snow);ground.rotation.x=-Math.PI/2;ground.position.y=-.04;ground.receiveShadow=true;scene.add(ground);
+const base=new THREE.Mesh(new THREE.CylinderGeometry(8.5,9,.25,6),ice);base.position.y=.08;base.receiveShadow=true;scene.add(base);
+for(let i=0;i<28;i++){const x=(Math.sin(i*17)*.5+.5)*32-16,z=(Math.cos(i*29)*.5+.5)*32-16;if(Math.hypot(x,z)>7)addTree(x,z)}
+addHouse(-4,-2);addHouse(4,-2);addHouse(4,3);
+const ring=new THREE.Mesh(new THREE.CylinderGeometry(1.15,1.3,.3,12),stone);ring.position.set(0,.25,0);ring.castShadow=true;root.add(ring);const brazier=new THREE.Mesh(new THREE.CylinderGeometry(.72,.9,.28,12),dark);brazier.position.y=.48;root.add(brazier);fireMesh=new THREE.Mesh(new THREE.ConeGeometry(.48,1.45,9),gold);fireMesh.position.y=1.25;root.add(fireMesh);fireLight=new THREE.PointLight('#ff9c38',3,9);fireLight.position.y=2;root.add(fireLight);
+for(let i=0;i<5;i++)addSurvivor(i);
+for(let i=0;i<180;i++){const m=new THREE.Mesh(new THREE.SphereGeometry(.035+Math.random()*.025,5,5),mat('#ffffff'));m.position.set((Math.random()-.5)*32,Math.random()*12,(Math.random()-.5)*32);scene.add(m);flakes.push(m)}
+scene.add(root);rebuildExtra();resize();new ResizeObserver(resize).observe(world);renderer.domElement.addEventListener('pointerdown',()=>{});renderer.domElement.addEventListener('click',pickBuilding);animate()}
+function rebuildExtra(){if(s.houses>1)addHouse(-5,3);if(s.houses>2)addHouse(0,-5);for(let i=0;i<s.farms;i++)addHouse(-5-i*2,-3,'farm');for(let i=0;i<s.workshops;i++)addHouse(6+i*2,0,'workshop');while(s.people>survivorGroups.length)addSurvivor(survivorGroups.length)}
+function resize(){if(!renderer)return;const w=world.clientWidth,h=world.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
+function animate(){requestAnimationFrame(animate);const t=clock.getElapsedTime();controls.update();fireMesh.scale.setScalar(1+Math.sin(t*8)*.07);fireLight.intensity=2.4+Math.sin(t*9)*.6;survivorGroups.forEach(o=>{o.g.position.y=Math.abs(Math.sin(t*2+o.phase))*.035;o.leg1.rotation.x=Math.sin(t*2+o.phase)*.16;o.leg2.rotation.x=-Math.sin(t*2+o.phase)*.16});flakes.forEach((f,i)=>{f.position.y-=.012+(i%4)*.002;f.position.x+=Math.sin(t+i)*.0008;if(f.position.y<0)f.position.y=12});renderer.render(scene,camera)}
+function pickBuilding(e){const rect=renderer.domElement.getBoundingClientRect(),mouse=new THREE.Vector2((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1),ray=new THREE.Raycaster();ray.setFromCamera(mouse,camera);const hits=ray.intersectObjects(root.children,true);if(hits.length){$('log').textContent='اكتشفت مبنى في المستوطنة. طوّر قاعدتك واعتنِ بالناجين.'}}
+window.zoom=d=>{camera.position.addScaledVector(camera.position.clone().sub(controls.target).normalize(),d);controls.update()};
+window.resetCamera=()=>{camera.position.set(10,12,14);controls.target.set(0,.4,0);controls.update()};
+function update(){['wood','coal','food','gear','people','day','houses','farms','workshops'].forEach(k=>$(k).textContent=s[k]);$('temp').textContent=Math.round(s.heat)+'%';$('heatbar').style.width=s.heat+'%';$('level').textContent='🔥 المدفأة · مستوى '+s.fire;$('weather').textContent=['ثلوج خفيفة','عاصفة ثلجية','سماء صافية'][s.weather%3];localStorage.setItem('xs-survival-save',JSON.stringify(s))}
 function say(t){$('log').textContent=t;update()}
-function gather(k){let n={wood:24,coal:18,food:25}[k];s[k]+=n;s.heat=Math.max(0,s.heat-1);say('عاد فريق العمل ومعه '+n+' من '+({wood:'الخشب',coal:'الفحم',food:'الطعام'}[k])+'.')}
-function feedFire(){if(s.coal<10)return say('الفحم غير كافٍ. أرسل فريقًا لاستخراجه.');s.coal-=10;s.heat=Math.min(100,s.heat+20);say('أُضيف الفحم إلى المدفأة. الدفء ينتشر في أرجاء المستوطنة.')}
-function upgradeFire(){if(s.wood<40||s.coal<25)return say('تحتاج إلى 40 خشب و25 فحم لترقية المدفأة.');s.wood-=40;s.coal-=25;s.fire++;s.heat=Math.min(100,s.heat+12);say('تم تطوير المدفأة إلى المستوى '+s.fire+'! أصبحت أكثر كفاءة في مواجهة البرد.')}
-function build(k){let costs={house:[35,0,0],farm:[50,0,0],workshop:[45,15,0]},c=costs[k];if(s.wood<c[0]||s.coal<c[1])return say('الموارد غير كافية لهذا المبنى.');s.wood-=c[0];s.coal-=c[1];if(k==='house'){s.houses++;s.people++;say('اكتمل المنزل! انضم ناجٍ جديد إلى مجتمعك.')}if(k==='farm'){s.farms++;say('بدأت المزرعة إنتاج المؤن. ستحصل على طعام إضافي كل يوم.')}if(k==='workshop'){s.workshops++;say('تم إنشاء الورشة. أصبحت صناعة المعدات ممكنة.')} }
-function nextDay(){s.day++;s.food=Math.max(0,s.food-s.people*3);s.heat=Math.max(0,s.heat-(16-s.fire*2));s.food+=s.farms*12;s.weather=(s.weather+1)%3;if(s.food===0)s.people=Math.max(1,s.people-1);if(s.heat<20)s.people=Math.max(1,s.people-1);say('بدأ اليوم '+s.day+'. استهلك السكان الطعام، وأنتجت المزارع '+(s.farms*12)+' مؤن.');}
-function showTip(which,b){document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');say(which==='base'?'هذه قاعدتك. طوّر المدفأة وابنِ المساكن.':which==='people'?'الناجون يعملون معًا. وفّر الطعام والدفء حتى لا تفقد أحدًا.':'ما وراء الجبال لم يُكتشف بعد. جهّز المؤن والمعدات قبل رحلة الاستكشاف.')}
-const c=$('world'),ctx=c.getContext('2d');
-function iso(x,y){return [450+(x-y)*67,286+(x+y)*35]}
-function poly(points,color,stroke='#ffffff45'){ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(...p):ctx.moveTo(...p));ctx.closePath();ctx.fillStyle=color;ctx.fill();ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke()}
-function tile(x,y,color){let [a,b]=iso(x,y);poly([[a,b-36],[a+67,b],[a,b+36],[a-67,b]],color)}
-function hut(x,y,scale=1,kind='home'){let [a,b]=iso(x,y);ctx.save();ctx.translate(a,b);ctx.scale(scale,scale);
-ctx.fillStyle='#536d7d';ctx.fillRect(-29,-2,58,36);ctx.fillStyle='#354e60';ctx.fillRect(-8,13,16,21);ctx.fillStyle='#f5d98d';ctx.fillRect(14,9,9,10);
-poly([[-36,0],[0,-38],[36,0],[0,13]],kind==='farm'?'#6e8f74':'#98583c');poly([[-36,0],[-7,-30],[7,-18],[-20,12]],'#d9edf0');
-if(kind==='farm'){ctx.fillStyle='#557d56';for(let i=0;i<4;i++){ctx.fillRect(-24+i*14,24,5,8)}}if(kind==='workshop'){ctx.fillStyle='#d6a64e';ctx.fillRect(-7,-16,14,12)}ctx.restore()}
-function tree(x,y){let [a,b]=iso(x,y);ctx.fillStyle='#69523f';ctx.fillRect(a-5,b-8,10,30);ctx.fillStyle='#24564f';ctx.beginPath();ctx.arc(a,b-24,24,0,Math.PI*2);ctx.fill();ctx.fillStyle='#dff4f4';ctx.beginPath();ctx.arc(a-8,b-34,10,0,Math.PI*2);ctx.fill()}
-function draw(){tick++;ctx.clearRect(0,0,900,570);let g=ctx.createLinearGradient(0,0,0,570);g.addColorStop(0,'#a8d8e5');g.addColorStop(1,'#d9edf0');ctx.fillStyle=g;ctx.fillRect(0,0,900,570);
-for(let y=-2;y<7;y++)for(let x=-3;x<8;x++)tile(x,y,(x+y)%2?'#e9f3ed':'#e1eee9');
-for(let i=0;i<55;i++){let x=(i*137+tick*.12)%900,y=(i*83+tick*.25)%560;ctx.fillStyle='#ffffffaa';ctx.beginPath();ctx.arc(x,y,1.5+(i%3),0,Math.PI*2);ctx.fill()}
-tree(-3,-1);tree(5,-2);tree(5,4);tree(-4,4);tree(3,5);
- // winding snowy path
-poly([[450,288],[518,324],[450,360],[382,324]],'#d5e4df','#c1d8d7');
- // buildings
-hut(-1,-1,1.05,'home');hut(2,1,.95,'home');if(s.houses>1)hut(-3,1,.9,'home');if(s.houses>2)hut(3,-2,.9,'home');if(s.farms)hut(-3,-2,1,'farm');if(s.workshops)hut(4,1,.95,'workshop');
- // central furnace
-let [fx,fy]=iso(0,1);ctx.fillStyle='#3e5666';ctx.beginPath();ctx.ellipse(fx,fy+4,46,25,0,0,Math.PI*2);ctx.fill();ctx.fillStyle='#d5e7e9';ctx.beginPath();ctx.ellipse(fx,fy,34,16,0,0,Math.PI*2);ctx.fill();ctx.fillStyle='#f08c31';ctx.beginPath();ctx.moveTo(fx,fy-56);ctx.bezierCurveTo(fx-42,fy-15,fx-15,fy+1,fx,fy+3);ctx.bezierCurveTo(fx+27,fy-15,fx+23,fy-38,fx,fy-56);ctx.fill();ctx.fillStyle='#ffe89b';ctx.beginPath();ctx.moveTo(fx,fy-40);ctx.quadraticCurveTo(fx-17,fy-10,fx,fy-3);ctx.quadraticCurveTo(fx+16,fy-16,fx,fy-40);ctx.fill();
- // animated survivors
-for(let i=0;i<s.people;i++){let x=fx-100+i*42+Math.sin(tick/16+i)*3,y=fy+75+(i%2)*18+Math.cos(tick/19+i)*2;ctx.fillStyle='#29465a';ctx.beginPath();ctx.arc(x,y-14,8,0,Math.PI*2);ctx.fill();ctx.fillStyle=i%2?'#bd7541':'#496c83';ctx.fillRect(x-7,y-7,14,22);ctx.strokeStyle='#263d4d';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(x-3,y+14);ctx.lineTo(x-5,y+24);ctx.moveTo(x+3,y+14);ctx.lineTo(x+5,y+24);ctx.stroke();ctx.fillStyle='#f0c99c';ctx.fillRect(x-4,y-21,8,5)}
-// selected marker
-if(selected){let [sx,sy]=iso(...selected);ctx.strokeStyle='#f7bc4d';ctx.lineWidth=4;ctx.beginPath();ctx.ellipse(sx,sy+8,48,22,0,0,Math.PI*2);ctx.stroke()}
-}
-c.addEventListener('click',e=>{let r=c.getBoundingClientRect(),x=(e.clientX-r.left)*900/r.width,y=(e.clientY-r.top)*570/r.height;let [fx,fy]=iso(0,1);if(Math.hypot(x-fx,y-fy)<65){selected=[0,1];say('المدفأة المركزية: مصدر الدفء الرئيسي للمستوطنة.')}else{selected=null;say('المستوطنة تنمو يومًا بعد يوم. اختر مبنى أو أرسل فرق العمل لجمع الموارد.')}});
-setInterval(()=>{draw()},100);
-update();
+window.gather=k=>{let n={wood:24,coal:18,food:25}[k];s[k]+=n;s.heat=Math.max(0,s.heat-1);say('عاد فريق العمل ومعه '+n+' من '+({wood:'الخشب',coal:'الفحم',food:'الطعام'}[k])+'.')};
+window.feedFire=()=>{if(s.coal<10)return say('الفحم غير كافٍ. أرسل فريقًا لاستخراجه.');s.coal-=10;s.heat=Math.min(100,s.heat+20);say('أُضيف الفحم إلى المدفأة. الدفء ينتشر في أرجاء المستوطنة.')};
+window.upgradeFire=()=>{if(s.wood<40||s.coal<25)return say('تحتاج إلى 40 خشب و25 فحم لترقية المدفأة.');s.wood-=40;s.coal-=25;s.fire++;s.heat=Math.min(100,s.heat+12);say('تم تطوير المدفأة إلى المستوى '+s.fire+'!')};
+window.build=k=>{let costs={house:[35,0],farm:[50,0],workshop:[45,15]},c=costs[k];if(s.wood<c[0]||s.coal<c[1])return say('الموارد غير كافية لهذا المبنى.');s.wood-=c[0];s.coal-=c[1];if(k==='house'){s.houses++;s.people++;addHouse(-5-(s.houses-2)*2,4)}if(k==='farm'){s.farms++;addHouse(-5-s.farms*2,-3,'farm')}if(k==='workshop'){s.workshops++;addHouse(6+s.workshops*2,0,'workshop')}while(s.people>survivorGroups.length)addSurvivor(survivorGroups.length);say(k==='house'?'اكتمل المنزل! انضم ناجٍ جديد إلى مجتمعك.':k==='farm'?'بدأت المزرعة إنتاج المؤن.':'تم إنشاء الورشة.')};
+window.nextDay=()=>{s.day++;s.food=Math.max(0,s.food-s.people*3);s.heat=Math.max(0,s.heat-(16-s.fire*2));s.food+=s.farms*12;s.weather=(s.weather+1)%3;if(s.food===0)s.people=Math.max(1,s.people-1);if(s.heat<20)s.people=Math.max(1,s.people-1);say('بدأ اليوم '+s.day+'. أنتجت المزارع '+(s.farms*12)+' مؤن.')};
+try{init();update()}catch(err){world.innerHTML='<div style="padding:30px;color:#102638;text-align:center">تعذر تشغيل العرض ثلاثي الأبعاد على هذا المتصفح. جرّب تحديث Chrome أو تفعيل WebGL.</div>';console.error(err)}
 </script></body></html>
