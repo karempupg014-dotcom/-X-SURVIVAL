@@ -32,9 +32,10 @@ footer{text-align:center;color:#8198a9;font-size:11px;padding:18px}
 <div class="panel"><h2>📊 حالة المستوطنة</h2><div class="stats"><div class="stat">🏠 المساكن<b id="houses">1</b></div><div class="stat">🌱 المزارع<b id="farms">0</b></div><div class="stat">⚙️ الورش<b id="workshops">0</b></div></div></div>
 <div class="panel"><h2>📜 أخبار الوادي</h2><div class="log" id="log">وصل خمسة ناجين إلى الوادي. أعد تشغيل المدفأة واجمع الموارد لتأسيس الملجأ.</div></div>
 </main><footer>X SURVIVAL · 3D Prototype 0.3 · تطوير مستمر</footer>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script type="module">
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
-import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 const $=id=>document.getElementById(id);
 const defaults={wood:120,coal:90,food:160,gear:12,people:5,heat:72,fire:1,houses:1,farms:0,workshops:0,day:1,weather:0};
 let s={...defaults};try{const old=JSON.parse(localStorage.getItem('xs-survival-save'));if(old)s={...s,...old,gear:old.gear??12,farms:old.farms??0,workshops:old.workshops??0}}catch(e){}
