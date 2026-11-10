@@ -22,22 +22,22 @@ footer{text-align:center;color:#8198a9;font-size:11px;padding:18px}
 @media(min-width:650px){.grid{grid-template-columns:repeat(3,1fr)}.resources{gap:12px;padding:14px}.resource{padding:12px}}
 </style></head>
 <body>
-<header><div><div class="brand">X <span>SURVIVAL</span></div><div class="sub">FROZEN FRONTIER · 3D PROTOTYPE 0.3</div></div><div class="day">☃️ اليوم <b id="day">1</b></div></header>
+<header><div><div class="brand">X <span>SURVIVAL</span></div><div class="sub">FROZEN FRONTIER · 3D SURVIVAL UPDATE 0.4</div></div><div class="day">☃️ اليوم <b id="day">1</b></div></header>
 <section class="resources"><div class="resource">🪵 <b id="wood">120</b><small>خشب</small></div><div class="resource">🪨 <b id="coal">90</b><small>فحم</small></div><div class="resource">🥫 <b id="food">160</b><small>طعام</small></div><div class="resource">⚙️ <b id="gear">12</b><small>معدات</small></div></section>
 <main>
 <div class="status"><span>👥 الناجون: <b id="people">5</b></span><span>🌡️ الحرارة: <b id="temp">72%</b></span><span>❄️ الطقس: <b id="weather">ثلوج خفيفة</b></span></div>
 <div class="scene"><div id="world" aria-label="عالم ثلاثي الأبعاد"></div><div class="hud"><span class="pill">🏔️ وادي الصقيع · عالم 3D</span><span class="pill" id="level">🔥 المدفأة · مستوى 1</span></div><div class="scene-help">اسحب لتدوير الكاميرا · قرّب بإصبعين · اضغط على مبنى</div><div class="camera"><button onclick="zoom(-2)">＋</button><button onclick="resetCamera()">إعادة الكاميرا</button><button onclick="zoom(2)">－</button></div></div>
 <div class="panel"><h2>🔥 المدفأة المركزية</h2><div class="meter"><i id="heatbar"></i></div><div class="grid"><button class="primary" onclick="feedFire()">🔥 إضافة 10 فحم</button><button onclick="upgradeFire()">⬆️ ترقية المدفأة · 40 خشب + 25 فحم</button></div><div class="hint">المدفأة هي قلب المستوطنة؛ حافظ على حرارتها لحماية الناجين.</div></div>
-<div class="panel"><h2>🏗️ تطوير المستوطنة</h2><div class="grid"><button onclick="gather('wood')">🪵 إرسال فريق لجمع الخشب</button><button onclick="gather('coal')">⛏️ استخراج الفحم</button><button onclick="gather('food')">🥫 جمع المؤن</button><button onclick="build('house')">🏠 بناء منزل · 35 خشب</button><button onclick="build('farm')">🌱 إنشاء مزرعة · 50 خشب</button><button onclick="build('workshop')">⚙️ ورشة معدات · 45 خشب + 15 فحم</button><button onclick="nextDay()">🌅 إنهاء اليوم التالي</button></div><div class="hint">كل منزل جديد يستقبل ناجيًا، والمزارع تنتج الطعام مع مرور الأيام.</div></div>
+<div class="panel"><h2>🏗️ تطوير المستوطنة</h2><div class="grid"><button onclick="gather('wood')">🪵 إرسال فريق لجمع الخشب</button><button onclick="gather('coal')">⛏️ استخراج الفحم</button><button onclick="gather('food')">🥫 جمع المؤن</button><button onclick="build('house')">🏠 بناء منزل · 35 خشب</button><button onclick="build('farm')">🌱 إنشاء مزرعة · 50 خشب</button><button onclick="build('workshop')">⚙️ ورشة معدات · 45 خشب + 15 فحم</button><button onclick="nextDay()">🌅 إنهاء اليوم التالي</button><button class="primary" onclick="expedition()">🧭 استكشاف الوادي · 15 طعام</button></div><div class="hint">كل منزل جديد يستقبل ناجيًا، والمزارع تنتج الطعام مع مرور الأيام.</div></div>
 <div class="panel"><h2>📊 حالة المستوطنة</h2><div class="stats"><div class="stat">🏠 المساكن<b id="houses">1</b></div><div class="stat">🌱 المزارع<b id="farms">0</b></div><div class="stat">⚙️ الورش<b id="workshops">0</b></div></div></div>
 <div class="panel"><h2>📜 أخبار الوادي</h2><div class="log" id="log">وصل خمسة ناجين إلى الوادي. أعد تشغيل المدفأة واجمع الموارد لتأسيس الملجأ.</div></div>
-</main><footer>X SURVIVAL · 3D Prototype 0.3 · تطوير مستمر</footer>
+</main><footer>X SURVIVAL · 3D Survival Update 0.4 · تطوير مستمر</footer>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script type="module">
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 const $=id=>document.getElementById(id);
-const defaults={wood:120,coal:90,food:160,gear:12,people:5,heat:72,fire:1,houses:1,farms:0,workshops:0,day:1,weather:0};
+const defaults={wood:120,coal:90,food:160,gear:12,people:5,heat:72,fire:1,houses:1,farms:0,workshops:0,day:1,weather:0,explorations:0};
 let s={...defaults};try{const old=JSON.parse(localStorage.getItem('xs-survival-save'));if(old)s={...s,...old,gear:old.gear??12,farms:old.farms??0,workshops:old.workshops??0}}catch(e){}
 let scene,camera,renderer,controls,fireMesh,fireLight,flakes=[],survivorGroups=[],buildingMeshes=[],clock=new THREE.Clock();
 const root=new THREE.Group();const world=$('world');
@@ -70,5 +70,7 @@ window.feedFire=()=>{if(s.coal<10)return say('الفحم غير كافٍ. أرس
 window.upgradeFire=()=>{if(s.wood<40||s.coal<25)return say('تحتاج إلى 40 خشب و25 فحم لترقية المدفأة.');s.wood-=40;s.coal-=25;s.fire++;s.heat=Math.min(100,s.heat+12);say('تم تطوير المدفأة إلى المستوى '+s.fire+'!')};
 window.build=k=>{let costs={house:[35,0],farm:[50,0],workshop:[45,15]},c=costs[k];if(s.wood<c[0]||s.coal<c[1])return say('الموارد غير كافية لهذا المبنى.');s.wood-=c[0];s.coal-=c[1];if(k==='house'){s.houses++;s.people++;addHouse(-5-(s.houses-2)*2,4)}if(k==='farm'){s.farms++;addHouse(-5-s.farms*2,-3,'farm')}if(k==='workshop'){s.workshops++;addHouse(6+s.workshops*2,0,'workshop')}while(s.people>survivorGroups.length)addSurvivor(survivorGroups.length);say(k==='house'?'اكتمل المنزل! انضم ناجٍ جديد إلى مجتمعك.':k==='farm'?'بدأت المزرعة إنتاج المؤن.':'تم إنشاء الورشة.')};
 window.nextDay=()=>{s.day++;s.food=Math.max(0,s.food-s.people*3);s.heat=Math.max(0,s.heat-(16-s.fire*2));s.food+=s.farms*12;s.weather=(s.weather+1)%3;if(s.food===0)s.people=Math.max(1,s.people-1);if(s.heat<20)s.people=Math.max(1,s.people-1);say('بدأ اليوم '+s.day+'. أنتجت المزارع '+(s.farms*12)+' مؤن.')};
+window.expedition=()=>{if(s.food<15)return say('لا توجد مؤن كافية. تحتاج إلى 15 طعام لإرسال بعثة.');s.food-=15;s.explorations++;const roll=Math.random();let report;if(roll<.28){const n=25+Math.floor(Math.random()*26);s.wood+=n;report='عثرت البعثة على أخشاب متجمدة وجمعت '+n+' خشب.'}else if(roll<.53){const n=18+Math.floor(Math.random()*18);s.coal+=n;report='اكتشفت البعثة منجمًا مهجورًا وعادت بـ '+n+' فحم.'}else if(roll<.75){const n=10+Math.floor(Math.random()*9);s.gear+=n;report='عثرت البعثة على معدات قديمة صالحة للاستخدام: '+n+' معدات.'}else if(roll<.91){const n=25+Math.floor(Math.random()*21);s.food+=n;report='عثر الناجون على مخزن مؤن مهجور: '+n+' طعام.'}else{ s.heat=Math.max(0,s.heat-8);report='فاجأت عاصفة ثلجية البعثة. عادت سالمة لكن المدفأة فقدت بعض الحرارة.'}say('نتيجة الاستكشاف رقم '+s.explorations+': '+report)};
+
 try{init();update()}catch(err){world.innerHTML='<div style="padding:30px;color:#102638;text-align:center">تعذر تشغيل العرض ثلاثي الأبعاد على هذا المتصفح. جرّب تحديث Chrome أو تفعيل WebGL.</div>';console.error(err)}
 </script></body></html>
