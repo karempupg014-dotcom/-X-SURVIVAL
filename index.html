@@ -2,103 +2,112 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#101d2a"><title>X SURVIVAL — Frozen Frontier</title>
+<meta name="theme-color" content="#20150f"><title>X FOOD TYCOON</title>
 <style>
-:root{color-scheme:dark;--gold:#f6bd55;--panel:#14283a;--line:#36566e}
-*{box-sizing:border-box}body{margin:0;background:#091522;color:#f5f8fb;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-header{padding:13px 16px;background:linear-gradient(115deg,#102337,#254b61);display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #49677b}
-.brand{font-weight:1000;letter-spacing:2px;font-size:23px}.brand span{color:var(--gold)}.sub{font-size:10px;color:#c2d7e2;letter-spacing:1px}.day{border:1px solid #7892a4;border-radius:20px;padding:7px 12px;font-size:12px}
-.resources{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;padding:10px;background:#0e1d2b;max-width:900px;margin:auto}.resource{background:linear-gradient(145deg,#20394e,#162b3d);border:1px solid #38576c;border-radius:12px;padding:9px 4px;text-align:center;font-weight:800}.resource b{font-size:19px}.resource small{display:block;color:#b4c9d6;font-size:10px}
-main{max-width:900px;margin:auto;padding:12px}.status{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:3px 0 10px;color:#c6d8e4;font-size:12px}
-.scene{position:relative;height:clamp(350px,68vw,570px);background:#a9d9e6;border:2px solid #54788d;border-radius:19px;overflow:hidden;box-shadow:0 12px 35px #0007}#world{width:100%;height:100%;display:block;touch-action:none}
-.hud{position:absolute;top:10px;right:10px;left:10px;display:flex;justify-content:space-between;pointer-events:none;gap:6px}.pill{background:#102638dc;border:1px solid #ffffff55;border-radius:22px;padding:7px 11px;font-size:11px}
-.scene-help{position:absolute;bottom:9px;left:10px;background:#102638bd;border-radius:12px;padding:5px 9px;font-size:10px;color:#e3f2f8;pointer-events:none}
-.camera{position:absolute;bottom:9px;right:10px;display:flex;gap:5px}.camera button{min-height:32px;padding:5px 10px;font-size:11px;background:#102638d9}
-.panel{background:linear-gradient(145deg,#172e42,#102235);border:1px solid var(--line);border-radius:17px;padding:13px;margin-top:12px;box-shadow:0 7px 20px #0002}h2{font-size:16px;margin:0 0 11px;color:#f0f8fc}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-button{border:1px solid #58758a;border-radius:12px;padding:12px 8px;background:linear-gradient(145deg,#29475e,#1c354a);color:#fff;font:inherit;font-size:13px;font-weight:750;cursor:pointer;min-height:48px}button:active{transform:scale(.98)}button.primary{background:linear-gradient(145deg,#bd7a2a,#8f511c);border-color:#efb34e}
-.meter{height:10px;background:#081522;border-radius:10px;overflow:hidden;margin:8px 0 12px;border:1px solid #365168}.meter i{display:block;height:100%;background:linear-gradient(90deg,#e59a32,#ffe08a);width:65%;transition:width .25s}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.stat{background:#0e2030;border-radius:10px;padding:8px;text-align:center;font-size:11px;color:#b8cbd7}.stat b{display:block;color:#fff;font-size:15px}.log{font-size:12px;color:#c4d5e0;line-height:1.8;min-height:38px}.hint{font-size:11px;color:#9fb7c8;margin-top:8px}
-footer{text-align:center;color:#8198a9;font-size:11px;padding:18px}
-@media(min-width:650px){.grid{grid-template-columns:repeat(3,1fr)}.resources{gap:12px;padding:14px}.resource{padding:12px}}
-</style></head>
+:root{--orange:#f28b32;--cream:#fff3df;--ink:#25180f;--panel:#fffaf2;--muted:#806e5c}
+*{box-sizing:border-box}body{margin:0;background:#f3e8d7;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header{background:linear-gradient(110deg,#28170f,#59311b);color:#fff;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.brand{font-weight:1000;font-size:23px;letter-spacing:1px}.brand span{color:#ffae52}.subtitle{font-size:10px;color:#f4d5b2}
+.topstats{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.topstats span{background:#ffffff18;border:1px solid #ffffff35;padding:6px 9px;border-radius:20px;font-size:12px}
+main{max-width:980px;margin:auto;padding:12px}.scene{height:clamp(300px,60vw,510px);position:relative;border-radius:18px;overflow:hidden;background:#b9d9d0;border:2px solid #d3b18a;box-shadow:0 8px 25px #54351e22}
+#world{width:100%;height:100%;display:block;touch-action:none}.scene-label{position:absolute;top:10px;right:10px;background:#25180fdb;color:white;padding:7px 11px;border-radius:18px;font-size:11px;pointer-events:none}
+.scene-tip{position:absolute;bottom:10px;left:10px;background:#25180fbd;color:white;padding:6px 9px;border-radius:10px;font-size:10px;pointer-events:none}
+.resources{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:10px 0}.resource{background:var(--panel);border:1px solid #ead8c2;border-radius:13px;padding:8px 5px;text-align:center;box-shadow:0 3px 8px #54351e0c}.resource b{display:block;font-size:18px}.resource small{color:var(--muted);font-size:10px}
+.panel{background:var(--panel);border:1px solid #e7d3bb;border-radius:16px;padding:13px;margin-top:10px;box-shadow:0 4px 13px #54351e0b}
+h2{font-size:15px;margin:0 0 10px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+button{border:1px solid #d4b48f;border-radius:12px;padding:11px 8px;background:#fff1df;color:#422817;font:inherit;font-weight:800;font-size:12px;min-height:45px;cursor:pointer}
+button.primary{background:linear-gradient(130deg,#f69a43,#db6b20);border-color:#d66a22;color:white}button:disabled{opacity:.45;cursor:not-allowed}
+.order{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff3e4;border:1px solid #f0d3b0;padding:9px 11px;border-radius:12px;font-size:12px}
+.meter{height:9px;background:#ead9c5;border-radius:10px;overflow:hidden;margin:8px 0}.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ef812e,#ffc46d);transition:width .25s}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.stat{background:#f8eddf;padding:8px;border-radius:10px;text-align:center;color:var(--muted);font-size:10px}.stat b{display:block;color:var(--ink);font-size:15px}
+#message{font-size:12px;line-height:1.7;color:#6d4b30;min-height:22px}.muted{font-size:10px;color:var(--muted);margin-top:7px}
+footer{text-align:center;color:#9a8168;font-size:10px;padding:16px}
+@media(min-width:650px){.grid{grid-template-columns:repeat(3,1fr)}.resources{gap:12px}.resource{padding:11px}}
+</style>
+</head>
 <body>
-<header><div><div class="brand">X <span>SURVIVAL</span></div><div class="sub">FROZEN FRONTIER · RIGGED SURVIVORS 0.8</div></div><div class="day">☃️ اليوم <b id="day">1</b></div></header>
-<section class="resources"><div class="resource">🪵 <b id="wood">120</b><small>خشب</small></div><div class="resource">🪨 <b id="coal">90</b><small>فحم</small></div><div class="resource">🥫 <b id="food">160</b><small>طعام</small></div><div class="resource">⚙️ <b id="gear">12</b><small>معدات</small></div></section>
+<header><div><div class="brand">X <span>FOOD TYCOON</span></div><div class="subtitle">3D RESTAURANT · COOK · HIRE · EXPAND</div></div><div class="topstats"><span>⭐ المستوى <b id="level">1</b></span><span>📅 اليوم <b id="day">1</b></span></div></header>
 <main>
-<div class="status"><span>👥 الناجون: <b id="people">5</b></span><span>🌡️ الحرارة: <b id="temp">72%</b></span><span>❄️ الطقس: <b id="weather">ثلوج خفيفة</b></span></div>
-<div class="scene"><div id="world" aria-label="عالم ثلاثي الأبعاد"></div><div class="hud"><span class="pill">🏔️ وادي الصقيع · عالم 3D</span><span class="pill" id="level">🔥 المدفأة · مستوى 1</span><span class="pill" id="assetStatus">👤 جاري تحميل الشخصيات…</span></div><div class="scene-help">اسحب لتدوير الكاميرا · قرّب بإصبعين · اضغط على مبنى</div><div class="camera"><button onclick="zoom(-2)">＋</button><button onclick="resetCamera()">إعادة الكاميرا</button><button onclick="zoom(2)">－</button></div></div>
-<div class="panel"><h2>🔥 المدفأة المركزية</h2><div class="meter"><i id="heatbar"></i></div><div class="grid"><button class="primary" onclick="feedFire()">🔥 إضافة 10 فحم</button><button onclick="upgradeFire()">⬆️ ترقية المدفأة · 40 خشب + 25 فحم</button></div><div class="hint">المدفأة هي قلب المستوطنة؛ حافظ على حرارتها لحماية الناجين.</div></div>
-<div class="panel"><h2>🏗️ تطوير المستوطنة</h2><div class="grid"><button onclick="gather('wood')">🪵 إرسال فريق لجمع الخشب</button><button onclick="gather('coal')">⛏️ استخراج الفحم</button><button onclick="gather('food')">🥫 جمع المؤن</button><button onclick="build('house')">🏠 بناء منزل · 35 خشب</button><button onclick="build('farm')">🌱 إنشاء مزرعة · 50 خشب</button><button onclick="build('workshop')">⚙️ ورشة معدات · 45 خشب + 15 فحم</button><button onclick="nextDay()">🌅 إنهاء اليوم التالي</button><button class="primary" onclick="expedition()">🧭 استكشاف الوادي · 15 طعام</button></div><div class="hint">كل منزل جديد يستقبل ناجيًا، والمزارع تنتج الطعام مع مرور الأيام.</div></div>
-<div class="panel"><h2>🔫 ترسانة المستوطنة</h2><div class="stats"><div class="stat">🗡️ أسلحة مصنّعة<b id="weapons">0</b></div><div class="stat">🎯 ذخيرة متاحة<b id="ammo">0</b></div><div class="stat">🏆 انتصارات الدفاع<b id="raidsWon">0</b></div></div><div class="grid"><button class="primary" onclick="craftWeapon()">🔨 تصنيع سلاح · 25 خشب + 4 معدات</button><button onclick="craftAmmo()">🎯 تصنيع 12 ذخيرة · 8 فحم + 2 معدات</button></div><div class="hint">الأسلحة تزيد قوة الحراس، والذخيرة تمنحهم دعمًا إضافيًا أثناء المعركة.</div></div><div class="panel"><h2>🧟 الدفاع عن المستوطنة</h2><div class="stats"><div class="stat">🧟 موجات تم صدّها<b id="kills">0</b></div><div class="stat">🛡️ صحة الأسوار<b id="wall">100%</b></div><div class="stat">⚔️ الخطر الحالي<b id="threat">هادئ</b></div></div><div class="meter"><i id="wallbar" style="width:100%;background:linear-gradient(90deg,#58b987,#b4ef9a)"></i></div><div class="grid"><button class="primary" onclick="startRaid()">🧟 بدء هجوم الزومبي</button><button onclick="defendRaid()">🛡️ الدفاع عن المستوطنة · 3 معدات</button><button onclick="repairWall()">🪵 إصلاح الأسوار · 20 خشب</button></div><div class="hint">جهّز الحراس بالمعدات، وراقب الزومبي وهم يقتربون من المدفأة. الورشة والناجون الأقوياء يساعدون في الدفاع.</div></div>
-<div class="panel"><h2>📊 حالة المستوطنة</h2><div class="stats"><div class="stat">🏠 المساكن<b id="houses">1</b></div><div class="stat">🌱 المزارع<b id="farms">0</b></div><div class="stat">⚙️ الورش<b id="workshops">0</b></div></div></div>
-<div class="panel"><h2>📜 أخبار الوادي</h2><div class="log" id="log">وصل خمسة ناجين إلى الوادي. أعد تشغيل المدفأة واجمع الموارد لتأسيس الملجأ.</div></div>
-</main><footer>X SURVIVAL · Frozen Frontier · Rigged Survivors 0.8</footer>
+<section class="scene"><div id="world"></div><div class="scene-label">🍔 مطعم X FOOD · فرع 01</div><div class="scene-tip">حرّك الكاميرا بالسحب وقرّب بإصبعين</div></section>
+<section class="resources">
+<div class="resource">💵 <b id="cash">250</b><small>الرصيد</small></div>
+<div class="resource">👥 <b id="served">0</b><small>زبائن تم خدمتهم</small></div>
+<div class="resource">🍔 <b id="stock">0</b><small>وجبات جاهزة</small></div>
+<div class="resource">👨‍🍳 <b id="staff">0</b><small>موظفون</small></div>
+</section>
+<section class="panel"><h2>🧾 طلب الزبون الحالي</h2><div class="order"><span id="orderName">🍔 برجر كلاسيك</span><b id="orderPrice">35 جنيه</b></div><div class="muted">حضّر الطلب يدويًا أو عيّن طاهيًا ليتولى العمل تلقائيًا.</div></section>
+<section class="panel"><h2>👨‍🍳 محطة الطبخ التفاعلية</h2><div class="stats"><div class="stat">🔥 حرارة الشواية<b id="grillTemp">جاهزة</b></div><div class="stat">⏱️ مرحلة الطبخ<b id="cookStage">لم يبدأ</b></div><div class="stat">⭐ جودة الوجبة<b id="quality">—</b></div></div><div class="meter"><i id="cookBar"></i></div><div class="grid"><button class="primary" id="cookBtn" onclick="cookStep()">🔥 ابدأ طبخ البرجر</button><button id="serveBtn" onclick="serveOrder()" disabled>🍽️ قدّم الطلب</button><button onclick="makeFries()">🍟 جهّز بطاطس جانبية</button></div><div class="muted">خطوات البرجر: تسخين الشواية ← تسوية اللحم ← تجميع الساندويتش ← تقديم الطلب.</div></section>
+<section class="panel"><h2>🏪 إدارة المطعم والتطوير</h2><div class="grid"><button onclick="hireChef()">👨‍🍳 توظيف طاهٍ · 120 جنيه</button><button onclick="hireCashier()">🧑‍💼 توظيف كاشير · 90 جنيه</button><button onclick="upgradeGrill()">🔥 تطوير الشواية · 180 جنيه</button><button onclick="upgradeDecor()">🪑 تطوير الديكور · 150 جنيه</button><button onclick="openBranch()">🏬 فتح فرع جديد · 900 جنيه</button><button onclick="collectIdle()">💰 تحصيل أرباح التشغيل</button></div><div class="muted">الطهاة والكاشير يساعدون في تشغيل المطعم تلقائيًا. الأرباح أثناء الغياب تُحسب عند العودة للعبة.</div></section>
+<section class="panel"><h2>📈 حالة النشاط</h2><div class="stats"><div class="stat">👨‍🍳 طهاة<b id="chefs">0</b></div><div class="stat">🧑‍💼 كاشير<b id="cashiers">0</b></div><div class="stat">🏬 الفروع<b id="branches">1</b></div></div></section>
+<section class="panel"><h2>📣 سجل المطعم</h2><div id="message">أهلًا بك في X FOOD TYCOON! ابدأ بتجهيز أول طلب.</div></section>
+</main><footer>X FOOD TYCOON · مشروع مستقل داخل مستودع SURVIVAL X</footer>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script type="module">
 import * as THREE from "three";
-import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import * as SkeletonUtils from "three/addons/utils/SkeletonUtils.js";
+import {OrbitControls} from "three/addons/controls/OrbitControls.js";
 const $=id=>document.getElementById(id);
-const defaults={wood:120,coal:90,food:160,gear:12,people:5,heat:72,fire:1,houses:1,farms:0,workshops:0,day:1,weather:0,explorations:0,kills:0,wall:100,raidActive:false,zombies:0,weapons:0,ammo:0,raidsWon:0};
-let s={...defaults};try{const old=JSON.parse(localStorage.getItem('xs-survival-save'));if(old)s={...s,...old,gear:old.gear??12,farms:old.farms??0,workshops:old.workshops??0}}catch(e){}
-let scene,camera,renderer,controls,fireMesh,fireLight,flakes=[],survivorGroups=[],buildingMeshes=[],zombieGroups=[],clock=new THREE.Clock(),lastFrame=0;
-const assetStates=new Map();
-function updateAssetStatus(){const states=[...assetStates.values()];const ok=states.filter(v=>v==='loaded').length,failed=states.filter(v=>v==='failed').length,pending=states.filter(v=>v==='loading').length;const el=$('assetStatus');if(el)el.textContent=failed?'👤 نماذج جاهزة '+ok+' · تعذّر '+failed:pending?'👤 تحميل النماذج '+ok+'/'+states.length:'👤 تم تحميل '+ok+' نماذج 3D';}
-const gltfLoader=new GLTFLoader(),characterCache=new Map(),characterMixers=[];
-const survivorModels=['https://gobkit.com/freebies/human016/ClanSmith.glb','https://gobkit.com/freebies/human017/FarmHand.glb','https://gobkit.com/freebies/human003/Scout.glb','https://gobkit.com/freebies/human004/CombatMedic.glb','https://gobkit.com/freebies/human016/MeadMaiden.glb'];
-const zombieModel='https://gobkit.com/freebies/human011/StitchedBrute.glb';
-const root=new THREE.Group();const world=$('world');
-function mat(color,rough=.9,metal=0){return new THREE.MeshStandardMaterial({color,roughness:rough,metalness:metal})}
-const snow=mat('#e6f2ef'),ice=mat('#b7dce5'),wood=mat('#76513c'),roof=mat('#9c6042'),dark=mat('#344b5c'),glass=mat('#f2d58a'),green=mat('#28584f'),cloth=mat('#456b84'),skin=mat('#e4bd96'),gold=mat('#f5a33b'),stone=mat('#657987');
-function addBox(parent,w,h,d,material,x,y,z){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),material);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m}
-function addHouse(x,z,type='house'){const g=new THREE.Group();g.position.set(x,0,z);addBox(g,2.0,1.35,1.8,dark,0,.68,0);addBox(g,.48,.8,.08,wood,0,.4,.94);addBox(g,.35,.35,.09,glass,.62,.86,.94);const r=new THREE.Mesh(new THREE.ConeGeometry(1.55,.85,4),type==='farm'?mat('#688a67'):roof);r.rotation.y=Math.PI/4;r.position.y=1.75;r.castShadow=true;g.add(r);if(type==='farm'){for(let i=0;i<4;i++){let row=addBox(g,.12,.16,1.25,green,-.65+i*.42,.12,-1.45);row.rotation.z=.1}}if(type==='workshop'){addBox(g,.5,.45,.5,stone,.85,1.05,-.65);addBox(g,.3,.2,.3,gold,.85,1.4,-.65)}
-addBox(g,.12,.16,1.9,wood,-.78,.18,0);addBox(g,.12,.16,1.9,wood,.78,.18,0);
-const chimney=addBox(g,.32,.75,.32,stone,.62,2.05,-.48);chimney.rotation.z=-.08;
-const snowRoof=new THREE.Mesh(new THREE.ConeGeometry(1.58,.22,4),snow);snowRoof.rotation.y=Math.PI/4;snowRoof.position.y=2.08;g.add(snowRoof);
-root.add(g);buildingMeshes.push(g);return g}
-function addMountain(x,z,radius,height,color='#91b7c5'){const g=new THREE.Group();g.position.set(x,0,z);const rock=mat(color);const peak=new THREE.Mesh(new THREE.ConeGeometry(radius,height,7),rock);peak.position.y=height*.48;peak.rotation.y=.22;peak.castShadow=true;peak.receiveShadow=true;g.add(peak);const cap=new THREE.Mesh(new THREE.ConeGeometry(radius*.48,height*.43,7),snow);cap.position.y=height*.79;cap.rotation.y=.22;cap.castShadow=true;g.add(cap);scene.add(g);return g}
-function addSnowDrift(x,z,w=1.4,d=.9){const mound=new THREE.Mesh(new THREE.SphereGeometry(1,12,8),snow);mound.position.set(x,.12,z);mound.scale.set(w,.22,d);mound.castShadow=true;mound.receiveShadow=true;scene.add(mound);return mound}
-function addSettlementWall(){const wallMat=mat('#725744'),capMat=mat('#dcebed');const radius=8.15,count=28;for(let i=0;i<count;i++){const a=i/count*Math.PI*2,x=Math.cos(a)*radius,z=Math.sin(a)*radius;const post=addBox(root,.22,1.05,.22,wallMat,x,.52,z);post.rotation.y=-a;const cap=addBox(root,.3,.12,.3,capMat,x,1.1,z);cap.rotation.y=-a}for(let i=0;i<count;i++){const a=(i+.5)/count*Math.PI*2,x=Math.cos(a)*radius,z=Math.sin(a)*radius;const rail=addBox(root,.16,.16,Math.PI*2*radius/count+.12,wallMat,x,.48,z);rail.rotation.y=-a;const top=addBox(root,.13,.13,Math.PI*2*radius/count+.12,capMat,x,.88,z);top.rotation.y=-a}const gate=addBox(root,1.9,1.25,.2,wood,0,.62,radius);gate.rotation.y=0;addBox(root,2.15,.16,.28,capMat,0,1.3,radius)}
-function addRoad(){const roadMat=mat('#82959a');const road=new THREE.Mesh(new THREE.PlaneGeometry(2.8,10),roadMat);road.rotation.x=-Math.PI/2;road.position.set(0,.025,12.3);road.receiveShadow=true;scene.add(road);for(let side of [-1,1]){const edge=new THREE.Mesh(new THREE.BoxGeometry(.16,.12,10),snow);edge.position.set(side*1.48,.09,12.3);edge.castShadow=true;scene.add(edge)}for(let z=8;z<17;z+=1.5){const track=addBox(root,.09,.025,.65,ice,-.48,.07,z);track.rotation.y=0;const track2=addBox(root,.09,.025,.65,ice,.48,.07,z)}}
-function addTree(x,z){const g=new THREE.Group();g.position.set(x,0,z);addBox(g,.22,1,.22,wood,0,.5,0);for(let i=0;i<3;i++){const c=new THREE.Mesh(new THREE.ConeGeometry(1.0-i*.16,1.7,7),green);c.position.y=1.25+i*.62;c.castShadow=true;g.add(c)}root.add(g)}
-function loadCharacter(url){if(!characterCache.has(url)){assetStates.set(url,'loading');updateAssetStatus();characterCache.set(url,new Promise((resolve,reject)=>gltfLoader.load(url,g=>{assetStates.set(url,'loaded');updateAssetStatus();resolve(g)},undefined,err=>{assetStates.set(url,'failed');updateAssetStatus();reject(err)})))}return characterCache.get(url)}
-function fitCharacter(model,height=1.8){const box=new THREE.Box3().setFromObject(model),size=box.getSize(new THREE.Vector3()),center=box.getCenter(new THREE.Vector3());const scale=height/Math.max(size.y,.01);model.scale.setScalar(scale);model.position.set(-center.x*scale,-box.min.y*scale,-center.z*scale);model.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true}});return model}
-function playClip(mixer,clips,preferred){const wanted=String(preferred||'').toLowerCase();const clip=clips.find(c=>c.name.toLowerCase()===wanted)||clips.find(c=>c.name.toLowerCase().includes(wanted))||clips[0];if(!clip)return null;const action=mixer.clipAction(clip);action.reset().play();return action}
-function addZombie(i){const holder=new THREE.Group();holder.position.set((i-1)*1.6,0,-9-i*.7);root.add(holder);const item={g:holder,mixer:null,phase:i};zombieGroups.push(item);loadCharacter(zombieModel).then(gltf=>{if(!holder.parent)return;const model=SkeletonUtils.clone(gltf.scene);fitCharacter(model,1.85);holder.add(model);if(gltf.animations?.length){item.mixer=new THREE.AnimationMixer(model);playClip(item.mixer,gltf.animations,'Walk');characterMixers.push(item.mixer)}}).catch(err=>{console.error('Zombie 3D asset failed:',zombieModel,err);holder.userData.assetError=true;})}
-function addSurvivor(i){const holder=new THREE.Group();holder.position.set(-2.2+i*.95,0,2.6+(i%2)*.45);root.add(holder);const item={g:holder,mixer:null,phase:i,home:holder.position.clone()};survivorGroups.push(item);loadCharacter(survivorModels[i%survivorModels.length]).then(gltf=>{if(!holder.parent)return;const model=SkeletonUtils.clone(gltf.scene);fitCharacter(model,1.72);holder.add(model);if(gltf.animations?.length){item.mixer=new THREE.AnimationMixer(model);const walk=gltf.animations.some(a=>a.name.toLowerCase().includes('walk')||a.name.toLowerCase().includes('run'));item.walking=walk;playClip(item.mixer,gltf.animations,walk?'Walk':'Idle');characterMixers.push(item.mixer)}}).catch(err=>{console.error('Survivor 3D asset failed:',survivorModels[i%survivorModels.length],err);holder.userData.assetError=true;})}
-function init(){scene=new THREE.Scene();scene.background=new THREE.Color('#b7dce8');scene.fog=new THREE.Fog('#c7e4e9',17,36);camera=new THREE.PerspectiveCamera(42,1,.1,100);camera.position.set(10,12,14);renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;world.appendChild(renderer.domElement);controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.target.set(0,.4,0);controls.minDistance=7;controls.maxDistance=25;controls.maxPolarAngle=Math.PI*.47;controls.minPolarAngle=.25;
-scene.add(new THREE.HemisphereLight('#e9fbff','#6c8790',2.0));const sun=new THREE.DirectionalLight('#fff2d9',2.6);sun.position.set(-7,14,8);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);sun.shadow.camera.left=-15;sun.shadow.camera.right=15;sun.shadow.camera.top=15;sun.shadow.camera.bottom=-15;scene.add(sun);
-const ground=new THREE.Mesh(new THREE.PlaneGeometry(42,42),snow);ground.rotation.x=-Math.PI/2;ground.position.y=-.04;ground.receiveShadow=true;scene.add(ground);
-for(let i=0;i<15;i++){const x=-21+i*3,z=-19-(i%3)*1.2;addMountain(x,z,2.6+(i%4)*.7,5+(i%5)*1.4,i%2?'#91b7c5':'#789eae')}
-for(let i=0;i<10;i++){addSnowDrift(-13+i*2.8,9+(i%3)*1.5,1.4,.9)}
-const base=new THREE.Mesh(new THREE.CylinderGeometry(8.5,9,.25,6),ice);base.position.y=.08;base.receiveShadow=true;scene.add(base);
-for(let i=0;i<28;i++){const x=(Math.sin(i*17)*.5+.5)*32-16,z=(Math.cos(i*29)*.5+.5)*32-16;if(Math.hypot(x,z)>7)addTree(x,z)}
-addHouse(-4,-2);addHouse(4,-2);addHouse(4,3);
-const ring=new THREE.Mesh(new THREE.CylinderGeometry(1.15,1.3,.3,12),stone);ring.position.set(0,.25,0);ring.castShadow=true;root.add(ring);const brazier=new THREE.Mesh(new THREE.CylinderGeometry(.72,.9,.28,12),dark);brazier.position.y=.48;root.add(brazier);fireMesh=new THREE.Mesh(new THREE.ConeGeometry(.48,1.45,9),gold);fireMesh.position.y=1.25;root.add(fireMesh);fireLight=new THREE.PointLight('#ff9c38',3,9);fireLight.position.y=2;root.add(fireLight);
-for(let i=0;i<5;i++)addSurvivor(i);
-if(s.raidActive){for(let i=0;i<s.zombies;i++)addZombie(i)}
-for(let i=0;i<180;i++){const m=new THREE.Mesh(new THREE.SphereGeometry(.035+Math.random()*.025,5,5),mat('#ffffff'));m.position.set((Math.random()-.5)*32,Math.random()*12,(Math.random()-.5)*32);scene.add(m);flakes.push(m)}
-scene.add(root);addSettlementWall();addRoad();rebuildExtra();resize();new ResizeObserver(resize).observe(world);renderer.domElement.addEventListener('pointerdown',()=>{});renderer.domElement.addEventListener('click',pickBuilding);animate()}
-function rebuildExtra(){if(s.houses>1)addHouse(-5,3);if(s.houses>2)addHouse(0,-5);for(let i=0;i<s.farms;i++)addHouse(-5-i*2,-3,'farm');for(let i=0;i<s.workshops;i++)addHouse(6+i*2,0,'workshop');while(s.people>survivorGroups.length)addSurvivor(survivorGroups.length)}
-function resize(){if(!renderer)return;const w=world.clientWidth,h=world.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
-function animate(){requestAnimationFrame(animate);const t=clock.getElapsedTime();controls.update();fireMesh.scale.setScalar(1+Math.sin(t*8)*.07);fireLight.intensity=2.4+Math.sin(t*9)*.6;const dt=Math.min((t-lastFrame)||.016,.05);lastFrame=t;characterMixers.forEach(m=>m.update(dt));survivorGroups.forEach(o=>{if(o.walking){o.g.position.x=o.home.x+Math.sin(t*.22+o.phase)*.55;o.g.position.z=o.home.z+Math.cos(t*.22+o.phase)*.38;o.g.rotation.y=Math.atan2(Math.cos(t*.22+o.phase)*.38,Math.cos(t*.22+o.phase)*.55)}else{o.g.position.copy(o.home);o.g.rotation.y=Math.sin(t*.35+o.phase)*.12}});zombieGroups.forEach(o=>{if(s.raidActive){o.g.position.z=Math.min(2.5,o.g.position.z+.0018);o.g.rotation.y=Math.sin(t*2+o.phase)*.08}});flakes.forEach((f,i)=>{f.position.y-=.012+(i%4)*.002;f.position.x+=Math.sin(t+i)*.0008;if(f.position.y<0)f.position.y=12});renderer.render(scene,camera)}
-function pickBuilding(e){const rect=renderer.domElement.getBoundingClientRect(),mouse=new THREE.Vector2((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1),ray=new THREE.Raycaster();ray.setFromCamera(mouse,camera);const hits=ray.intersectObjects(root.children,true);if(hits.length){$('log').textContent='اكتشفت مبنى في المستوطنة. طوّر قاعدتك واعتنِ بالناجين.'}}
-window.zoom=d=>{camera.position.addScaledVector(camera.position.clone().sub(controls.target).normalize(),d);controls.update()};
-window.resetCamera=()=>{camera.position.set(10,12,14);controls.target.set(0,.4,0);controls.update()};
-function update(){['wood','coal','food','gear','people','day','houses','farms','workshops','weapons','ammo','raidsWon'].forEach(k=>$(k).textContent=s[k]);$('kills').textContent=s.kills;$('wall').textContent=s.wall+'%';$('wallbar').style.width=s.wall+'%';$('threat').textContent=s.raidActive?'هجوم!':'هادئ';$('temp').textContent=Math.round(s.heat)+'%';$('heatbar').style.width=s.heat+'%';$('level').textContent='🔥 المدفأة · مستوى '+s.fire;$('weather').textContent=['ثلوج خفيفة','عاصفة ثلجية','سماء صافية'][s.weather%3];localStorage.setItem('xs-survival-save',JSON.stringify(s))}
-function say(t){$('log').textContent=t;update()}
-window.gather=k=>{let n={wood:24,coal:18,food:25}[k];s[k]+=n;s.heat=Math.max(0,s.heat-1);say('عاد فريق العمل ومعه '+n+' من '+({wood:'الخشب',coal:'الفحم',food:'الطعام'}[k])+'.')};
-window.feedFire=()=>{if(s.coal<10)return say('الفحم غير كافٍ. أرسل فريقًا لاستخراجه.');s.coal-=10;s.heat=Math.min(100,s.heat+20);say('أُضيف الفحم إلى المدفأة. الدفء ينتشر في أرجاء المستوطنة.')};
-window.upgradeFire=()=>{if(s.wood<40||s.coal<25)return say('تحتاج إلى 40 خشب و25 فحم لترقية المدفأة.');s.wood-=40;s.coal-=25;s.fire++;s.heat=Math.min(100,s.heat+12);say('تم تطوير المدفأة إلى المستوى '+s.fire+'!')};
-window.build=k=>{let costs={house:[35,0],farm:[50,0],workshop:[45,15]},c=costs[k];if(s.wood<c[0]||s.coal<c[1])return say('الموارد غير كافية لهذا المبنى.');s.wood-=c[0];s.coal-=c[1];if(k==='house'){s.houses++;s.people++;addHouse(-5-(s.houses-2)*2,4)}if(k==='farm'){s.farms++;addHouse(-5-s.farms*2,-3,'farm')}if(k==='workshop'){s.workshops++;addHouse(6+s.workshops*2,0,'workshop')}while(s.people>survivorGroups.length)addSurvivor(survivorGroups.length);say(k==='house'?'اكتمل المنزل! انضم ناجٍ جديد إلى مجتمعك.':k==='farm'?'بدأت المزرعة إنتاج المؤن.':'تم إنشاء الورشة.')};
-window.craftWeapon=()=>{if(s.wood<25||s.gear<4)return say('تحتاج إلى 25 خشب و4 معدات لتصنيع سلاح.');s.wood-=25;s.gear-=4;s.weapons++;say('تم تصنيع سلاح جديد! أصبح لدى المستوطنة '+s.weapons+' أسلحة.')};
-window.craftAmmo=()=>{if(s.coal<8||s.gear<2)return say('تحتاج إلى 8 فحم و2 معدات لصناعة الذخيرة.');s.coal-=8;s.gear-=2;s.ammo+=12;say('تم تصنيع 12 طلقة. إجمالي الذخيرة: '+s.ammo+'.')};
-window.startRaid=()=>{if(s.raidActive)return say('هناك هجوم جارٍ بالفعل! صدّ الموجة أولًا.');s.raidActive=true;s.zombies=3+Math.min(4,Math.floor(s.day/3));zombieGroups.forEach(o=>root.remove(o.g));zombieGroups=[];for(let i=0;i<s.zombies;i++)addZombie(i);say('إنذار! مجموعة زومبي تقترب من المستوطنة. جهّز الحراس وابدأ الدفاع!')};
-window.defendRaid=()=>{if(!s.raidActive)return say('لا يوجد هجوم حالي. يمكنك بدء هجوم تجريبي من الزر الأول.');if(s.gear<3)return say('تحتاج إلى 3 معدات لتجهيز الحراس.');s.gear-=3;const usedAmmo=Math.min(s.ammo,s.zombies*2);s.ammo-=usedAmmo;const power=s.people*2+s.fire*2+s.workshops*4+s.weapons*8+usedAmmo*2+Math.floor(s.wall/10);const danger=s.zombies*3+Math.floor(Math.random()*8);if(power>=danger){s.kills+=s.zombies;s.raidsWon++;s.heat=Math.max(0,s.heat-3);say('نجح الدفاع! هزم الحراس '+s.zombies+' زومبي باستخدام '+s.weapons+' أسلحة و'+usedAmmo+' ذخيرة.') }else{const damage=Math.min(45,15+s.zombies*4);s.wall=Math.max(0,s.wall-damage);s.people=Math.max(1,s.people-1);say('تراجع الحراس! خسرتم ناجيًا وتضررت الأسوار بنسبة '+damage+'%. طوّر المستوطنة قبل الهجوم القادم.')}s.raidActive=false;s.zombies=0;zombieGroups.forEach(o=>root.remove(o.g));zombieGroups=[];update()};
-window.repairWall=()=>{if(s.wood<20)return say('تحتاج إلى 20 خشب لإصلاح الأسوار.');s.wood-=20;s.wall=Math.min(100,s.wall+25);say('تم إصلاح الأسوار وزادت متانتها.')};
-window.nextDay=()=>{s.day++;s.food=Math.max(0,s.food-s.people*3);s.heat=Math.max(0,s.heat-(16-s.fire*2));s.food+=s.farms*12;s.weather=(s.weather+1)%3;if(s.food===0)s.people=Math.max(1,s.people-1);if(s.heat<20)s.people=Math.max(1,s.people-1);say('بدأ اليوم '+s.day+'. أنتجت المزارع '+(s.farms*12)+' مؤن.')};
-window.expedition=()=>{if(s.food<15)return say('لا توجد مؤن كافية. تحتاج إلى 15 طعام لإرسال بعثة.');s.food-=15;s.explorations++;const roll=Math.random();let report;if(roll<.28){const n=25+Math.floor(Math.random()*26);s.wood+=n;report='عثرت البعثة على أخشاب متجمدة وجمعت '+n+' خشب.'}else if(roll<.53){const n=18+Math.floor(Math.random()*18);s.coal+=n;report='اكتشفت البعثة منجمًا مهجورًا وعادت بـ '+n+' فحم.'}else if(roll<.75){const n=10+Math.floor(Math.random()*9);s.gear+=n;report='عثرت البعثة على معدات قديمة صالحة للاستخدام: '+n+' معدات.'}else if(roll<.91){const n=25+Math.floor(Math.random()*21);s.food+=n;report='عثر الناجون على مخزن مؤن مهجور: '+n+' طعام.'}else{ s.heat=Math.max(0,s.heat-8);report='فاجأت عاصفة ثلجية البعثة. عادت سالمة لكن المدفأة فقدت بعض الحرارة.'}say('نتيجة الاستكشاف رقم '+s.explorations+': '+report)};
-
-try{init();update()}catch(err){console.error('X SURVIVAL startup error:',err);const gl=document.createElement('canvas');const gl2=gl.getContext('webgl2')||gl.getContext('webgl')||gl.getContext('experimental-webgl');const detail=(err&&err.message)?err.message:String(err);world.innerHTML='<div style="padding:22px;color:#102638;text-align:center;line-height:1.7"><b style="font-size:18px">تعذر تشغيل مشهد اللعبة</b><p>'+(gl2?'المتصفح يدعم WebGL، لكن حدث خطأ داخل اللعبة.':'المتصفح لا يوفّر WebGL حاليًا.')+'</p><small style="direction:ltr;display:block;overflow-wrap:anywhere;background:#fff;padding:10px;border-radius:8px">'+detail.replace(/[<>&]/g,ch=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[ch]))+'</small><p>افتح الرابط في Chrome مباشرة، ثم حدّث الصفحة.</p></div>';}
-</script></body></html>
+const base={cash:250,served:0,stock:0,staff:0,chefs:0,cashiers:0,branches:1,level:1,day:1,grill:1,decor:1,stage:0,quality:0,lastSeen:Date.now(),idleRate:0};
+let s={...base};try{const v=JSON.parse(localStorage.getItem("x-food-tycoon-save"));if(v)s={...s,...v}}catch(e){}
+let scene,camera,renderer,controls,clock=new THREE.Clock(),customers=[],steam=[],counterObjects=[];
+const sceneHost=$("world");
+function material(color,rough=.85){return new THREE.MeshStandardMaterial({color,roughness:rough})}
+const mats={floor:material("#d7c2a3"),tile:material("#f0dfc8"),wall:material("#fff0db"),orange:material("#e87927"),dark:material("#3b281d"),wood:material("#98623a"),metal:material("#69777c",.35),green:material("#6c9c69"),glass:material("#a8d8dc",.2),skin:material("#d7a77e"),shirt:material("#e67b31"),white:material("#fffaf1")};
+function box(w,h,d,mat,x,y,z,parent=scene){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m}
+function cylinder(rt,rb,h,mat,x,y,z,parent=scene){const m=new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,20),mat);m.position.set(x,y,z);m.castShadow=true;parent.add(m);return m}
+function person(x,z,shirt){const g=new THREE.Group();scene.add(g);cylinder(.23,.25,.72,shirt,0,.55,0,g);const head=new THREE.Mesh(new THREE.SphereGeometry(.19,18,14),mats.skin);head.position.y=1.05;g.add(head);box(.43,.09,.25,mats.dark,0,1.27,0,g);g.position.set(x,0,z);return g}
+function buildRestaurant(){
+ scene=new THREE.Scene();scene.background=new THREE.Color("#b8d8d0");scene.fog=new THREE.Fog("#b8d8d0",15,33);
+ camera=new THREE.PerspectiveCamera(42,sceneHost.clientWidth/sceneHost.clientHeight,.1,100);camera.position.set(8,8,10);
+ renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});renderer.setPixelRatio(Math.min(devicePixelRatio,1.8));renderer.setSize(sceneHost.clientWidth,sceneHost.clientHeight);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;sceneHost.appendChild(renderer.domElement);
+ controls=new OrbitControls(camera,renderer.domElement);controls.target.set(0,0.5,0);controls.enableDamping=true;controls.maxPolarAngle=Math.PI*.48;controls.minDistance=6;controls.maxDistance=19;
+ scene.add(new THREE.HemisphereLight("#fff8e8","#82634c",2));
+ const sun=new THREE.DirectionalLight("#fff0d2",2.3);sun.position.set(-5,10,7);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);scene.add(sun);
+ box(20,.25,20,mats.floor,0,-.15,0);
+ for(let x=-9;x<10;x+=2)for(let z=-9;z<10;z+=2)box(1.94,.015,1.94,mats.tile,x,-.015,z);
+ // restaurant footprint and walls
+ box(9,.22,7,mats.dark,0,.05,0);
+ box(9,2.8,.22,mats.wall,0,1.45,-3.4);
+ box(.22,2.8,6.8,mats.wall,-4.4,1.45,0);
+ box(.22,2.8,6.8,mats.wall,4.4,1.45,0);
+ box(9,.18,.25,mats.orange,0,2.9,-3.4);
+ // front sign
+ box(4.4,.75,.18,mats.dark,0,2.55,-3.52);box(4.1,.1,.08,mats.orange,0,2.8,-3.64);
+ // counter
+ box(5,.9,.9,mats.wood,0,.55,-1.65);box(5,.12,.95,mats.orange,0,1.05,-1.65);
+ // grill and kitchen
+ box(1.55,.8,1.2,mats.metal,-2.8,.55,-2.45);box(1.35,.08,1,mats.dark,-2.8,1,-2.45);
+ for(let i=0;i<3;i++)cylinder(.12,.12,.06,mats.orange,-3.2+i*.4,1.08,-2.45);
+ // tables and chairs
+ for(const x of [-2,2]){for(const z of [1.2,2.7]){cylinder(.72,.72,.12,mats.wood,x,.85,z);cylinder(.1,.1,.8,mats.dark,x,.42,z);for(const dx of [-.95,.95]){box(.48,.65,.48,mats.orange,x+dx,.35,z);}}}
+ // menu boards
+ box(2.2,1.15,.12,mats.dark,2.7,2.05,-3.25);
+ for(let i=0;i<3;i++)box(1.65,.045,.025,mats.orange,2.7,2.35-i*.3,-3.17);
+ // plants
+ for(const x of [-5,5]){cylinder(.45,.55,.6,mats.wood,x,.3,2.8);cylinder(.5,.2,.85,mats.green,x,.95,2.8);}
+ // cash register
+ box(.5,.22,.4,mats.dark,1.9,1.18,-1.6);box(.32,.18,.03,mats.glass,1.9,1.34,-1.39);
+ // staff and customers
+ person(-.8, -.6,mats.shirt);person(1.4,-.8,mats.green);customers=[person(-1.7,3.9,mats.white),person(0,4.5,mats.orange),person(1.8,3.8,mats.white)];
+ // small food props
+ for(let i=0;i<3;i++){cylinder(.18,.18,.08,mats.orange,-1.4+i*.5,.18,1.2);cylinder(.13,.13,.09,mats.green,-1.4+i*.5,.26,1.2)}
+ window.addEventListener("resize",resize);
+}
+function resize(){if(!renderer)return;camera.aspect=sceneHost.clientWidth/sceneHost.clientHeight;camera.updateProjectionMatrix();renderer.setSize(sceneHost.clientWidth,sceneHost.clientHeight)}
+function animate(){requestAnimationFrame(animate);const t=clock.getElapsedTime();controls.update();customers.forEach((p,i)=>{p.position.x+=Math.sin(t*.45+i)*.0008;p.rotation.y=Math.sin(t*.6+i)*.12});renderer.render(scene,camera)}
+function save(){s.lastSeen=Date.now();localStorage.setItem("x-food-tycoon-save",JSON.stringify(s))}
+function msg(t){$("message").textContent=t}
+function refresh(){for(const k of ["cash","served","stock","staff","level","day","chefs","cashiers","branches"])$(k).textContent=s[k];$("cookStage").textContent=["لم يبدأ","تسخين الشواية","تسوية اللحم","تجميع الساندويتش","جاهز للتقديم"][s.stage]||"لم يبدأ";$("quality").textContent=s.quality? s.quality+"/100":"—";$("grillTemp").textContent=s.grill>=3?"احترافية":"جاهزة";$("cookBar").style.width=(s.stage/4*100)+"%";$("cookBtn").textContent=s.stage===0?"🔥 ابدأ طبخ البرجر":s.stage===1?"🥩 ابدأ تسوية اللحم":s.stage===2?"🥬 اجمع الساندويتش":s.stage===3?"✨ إنهاء التحضير":"🍔 جاهز";$("serveBtn").disabled=s.stage!==4}
+function cookStep(){if(s.stage===0){s.stage=1;msg("تم تشغيل الشواية. ابدأ تسوية قطعة اللحم.");}else if(s.stage===1){s.stage=2;s.quality=80+Math.min(15,s.grill*4);msg("اللحم أصبح جاهزًا! حان وقت تجميع البرجر.");}else if(s.stage===2){s.stage=3;msg("أضفت الخبز والخضروات والصوص.");}else if(s.stage===3){s.stage=4;s.quality=Math.min(100,s.quality+5);msg("البرجر جاهز. قدّمه للزبون لتحصيل المبلغ.");}else{return}refresh();save()}
+function serveOrder(){if(s.stage!==4)return;const earned=35+Math.floor(s.quality/10);s.cash+=earned;s.served++;s.stock=Math.max(0,s.stock-1);s.stage=0;s.quality=0;msg("تم تسليم الطلب بنجاح! حصلت على "+earned+" جنيه.");refresh();save()}
+function makeFries(){if(s.cash<12){msg("تحتاج 12 جنيه لتجهيز البطاطس.");return}s.cash-=12;s.stock++;msg("جهزت حصة بطاطس جانبية وأصبحت متاحة للبيع.");refresh();save()}
+function hireChef(){if(s.cash<120){msg("الرصيد غير كافٍ لتوظيف طاهٍ.");return}s.cash-=120;s.chefs++;s.staff++;s.idleRate+=7;msg("انضم طاهٍ جديد! سيجهز وجبات تلقائيًا أثناء اللعب.");refresh();save()}
+function hireCashier(){if(s.cash<90){msg("الرصيد غير كافٍ لتوظيف كاشير.");return}s.cash-=90;s.cashiers++;s.staff++;s.idleRate+=3;msg("تم توظيف كاشير لتسريع خدمة الزبائن.");refresh();save()}
+function upgradeGrill(){if(s.cash<180){msg("تحتاج 180 جنيه لتطوير الشواية.");return}s.cash-=180;s.grill++;s.level=Math.max(s.level,s.grill);msg("تم تطوير الشواية إلى المستوى "+s.grill+".");refresh();save()}
+function upgradeDecor(){if(s.cash<150){msg("تحتاج 150 جنيه لتطوير الديكور.");return}s.cash-=150;s.decor++;s.level++;msg("أصبح المطعم أجمل! زادت قيمة الطلبات.");refresh();save()}
+function openBranch(){if(s.cash<900){msg("تحتاج 900 جنيه لفتح فرع جديد.");return}s.cash-=900;s.branches++;s.level++;s.idleRate+=12;msg("مبروك! افتتحت فرعًا جديدًا يضيف أرباحًا تلقائية.");refresh();save()}
+function collectIdle(){const gain=Math.floor(s.idleRate*5);if(!gain){msg("وظّف طهاة أو افتح فروعًا أولًا لبدء الأرباح التلقائية.");return}s.cash+=gain;msg("تحصيل أرباح التشغيل: "+gain+" جنيه.");refresh();save()}
+function applyOffline(){const elapsed=Math.min(8*60*60,Math.max(0,Date.now()-(s.lastSeen||Date.now())));const gain=Math.floor(elapsed/60/60*s.idleRate*12);if(gain>0){s.cash+=gain;msg("أهلًا بعودتك! حقق مطعمك "+gain+" جنيه أثناء غيابك.");}refresh()}
+window.cookStep=cookStep;window.serveOrder=serveOrder;window.makeFries=makeFries;window.hireChef=hireChef;window.hireCashier=hireCashier;window.upgradeGrill=upgradeGrill;window.upgradeDecor=upgradeDecor;window.openBranch=openBranch;window.collectIdle=collectIdle;
+buildRestaurant();applyOffline();refresh();animate();setInterval(()=>{if(s.chefs>0||s.cashiers>0){const gain=s.idleRate;s.cash+=gain;if(s.chefs>0)s.stock=Math.min(20,s.stock+s.chefs);refresh();save()}},10000);window.addEventListener("beforeunload",save);
+</script>
+</body></html>
