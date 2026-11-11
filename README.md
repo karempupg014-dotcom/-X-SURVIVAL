@@ -1,19 +1,30 @@
-# X SURVIVAL
+# X FOOD TYCOON
 
-Mobile-first playable web prototype for the X SURVIVAL frozen settlement game.
+A mobile-first 3D restaurant management game prototype, replacing the former X SURVIVAL browser prototype in this repository.
 
-## Prototype 0.1
-- Isometric-style snowy settlement scene
-- Central fire with heat meter and upgrades
-- Wood, coal, and food resources
-- Gathering, house construction, and storage construction
-- Day cycle and basic survival pressure
-- Local save in the browser using localStorage
+## Current playable prototype
+- Three.js 3D restaurant scene with orbit camera controls
+- Interactive burger preparation steps and order serving
+- Cash, served-customer, stock, employee, and branch progression
+- Hire chefs and cashiers
+- Upgrade the grill and restaurant decor
+- Automatic staff income while the game is open
+- Offline earnings calculated when returning to the game
+- Local browser save using localStorage
+- Arabic right-to-left interface, designed for mobile screens
 
-## Run
-Open `index.html` in a browser, or enable GitHub Pages:
-1. Open repository **Settings → Pages**.
-2. Under **Build and deployment**, choose **GitHub Actions**.
-3. The workflow in `.github/workflows/pages.yml` publishes the prototype.
+## Preview
+Enable GitHub Pages for this repository:
+1. Open **Settings → Pages**.
+2. Under **Build and deployment**, select **GitHub Actions**.
+3. The workflow at `.github/workflows/pages.yml` deploys the root folder.
+4. Open the published Pages URL after the workflow completes.
 
-This is an early browser prototype, not yet the Unreal Engine 3D Android game.
+## Run locally
+Open `index.html` through a local web server (recommended because the game loads Three.js as ES modules from a CDN). For example, use VS Code Live Server.
+
+## Notes
+- This is an early browser-playable prototype, not yet a native Android APK.
+- Three.js is loaded from jsDelivr; internet access is required.
+- Progress is stored locally in the browser on the same device/browser.
+- AdMob is not integrated yet. Ads will be added after the game loop and platform build are stabilized.
