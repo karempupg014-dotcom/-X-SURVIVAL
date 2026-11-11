@@ -1,4 +1,4 @@
-name: Deploy X SURVIVAL prototype to GitHub Pages
+name: Deploy X FOOD TYCOON prototype to GitHub Pages
 
 on:
   push:
